@@ -1,2 +1,3 @@
 name:  Joe Dumont
 markdown: kramdown
+permalink:  /blog/:year/:month/:day/:title
