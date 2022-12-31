@@ -91,6 +91,11 @@ img {
 	color: #939393;
 }
 
+/* Right-aligned section inside the top navigation */
+.mainMenu-right {
+  float: right;
+}
+
 #top-menu {
     background: white;
 }
