@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,7 +10,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
- 
+
   :root {
     --cream: #FAF7F2;
     --warm-white: #FFFDF9;
@@ -28,9 +29,9 @@
     --card-bg: #FFFFFF;
     --page-bg: #FAF7F2;
   }
- 
+
   html { scroll-behavior: smooth; }
- 
+
   body {
     font-family: 'DM Sans', sans-serif;
     background: var(--page-bg);
@@ -39,7 +40,7 @@
     line-height: 1.6;
     overflow-x: hidden;
   }
- 
+
   /* NAV */
   nav {
     position: fixed;
@@ -54,7 +55,7 @@
     align-items: center;
     justify-content: space-between;
   }
- 
+
   .nav-logo {
     font-family: 'Playfair Display', serif;
     font-size: 1.2rem;
@@ -62,13 +63,13 @@
     text-decoration: none;
     letter-spacing: -0.01em;
   }
- 
+
   .nav-links {
     display: flex;
     gap: 2rem;
     list-style: none;
   }
- 
+
   .nav-links a {
     font-size: 0.875rem;
     font-weight: 400;
@@ -78,9 +79,9 @@
     text-transform: uppercase;
     transition: color 0.2s;
   }
- 
+
   .nav-links a:hover { color: var(--clay); }
- 
+
   /* HERO */
   .hero {
     min-height: 100vh;
@@ -92,7 +93,7 @@
     position: relative;
     overflow: hidden;
   }
- 
+
   .hero::before {
     content: '';
     position: absolute;
@@ -105,9 +106,9 @@
     opacity: 0.5;
     pointer-events: none;
   }
- 
+
   .hero-text { position: relative; z-index: 1; }
- 
+
   .hero-eyebrow {
     font-size: 0.75rem;
     font-weight: 500;
@@ -119,7 +120,7 @@
     align-items: center;
     gap: 0.75rem;
   }
- 
+
   .hero-eyebrow::before {
     content: '';
     display: block;
@@ -127,7 +128,7 @@
     height: 1px;
     background: var(--clay);
   }
- 
+
   h1 {
     font-family: 'Playfair Display', serif;
     font-size: clamp(2.8rem, 5.5vw, 4.5rem);
@@ -137,12 +138,12 @@
     color: var(--ink);
     margin-bottom: 1.5rem;
   }
- 
+
   h1 em {
     font-style: italic;
     color: var(--clay);
   }
- 
+
   .hero-desc {
     font-size: 1.05rem;
     color: var(--ink-mid);
@@ -150,13 +151,13 @@
     line-height: 1.75;
     margin-bottom: 2.5rem;
   }
- 
+
   .hero-cta {
     display: flex;
     gap: 1rem;
     flex-wrap: wrap;
   }
- 
+
   .btn-primary {
     background: var(--clay);
     color: white;
@@ -168,12 +169,12 @@
     letter-spacing: 0.01em;
     transition: background 0.2s, transform 0.15s;
   }
- 
+
   .btn-primary:hover {
     background: var(--clay-dark);
     transform: translateY(-1px);
   }
- 
+
   .btn-secondary {
     background: transparent;
     color: var(--ink);
@@ -185,13 +186,13 @@
     font-weight: 400;
     transition: border-color 0.2s, transform 0.15s;
   }
- 
+
   .btn-secondary:hover {
     border-color: var(--clay);
     color: var(--clay);
     transform: translateY(-1px);
   }
- 
+
   /* Hero decorative cards */
   .hero-visual {
     position: relative;
@@ -202,7 +203,7 @@
     gap: 1rem;
     transform: rotate(-1deg);
   }
- 
+
   .hero-card {
     background: var(--card-bg);
     border-radius: 16px;
@@ -212,24 +213,24 @@
     overflow: hidden;
     transition: transform 0.3s;
   }
- 
+
   .hero-card:hover { transform: translateY(-3px) rotate(0.5deg); }
- 
+
   .hero-card.large {
     grid-column: 1 / -1;
     background: var(--clay);
     color: white;
     padding: 1.75rem;
   }
- 
+
   .hero-card.large .card-icon { font-size: 2rem; margin-bottom: 0.5rem; }
   .hero-card.large .card-title { font-family: 'Playfair Display', serif; font-size: 1.4rem; color: white; }
   .hero-card.large .card-sub { font-size: 0.85rem; color: rgba(255,255,255,0.75); margin-top: 0.25rem; }
- 
+
   .hero-card .card-icon { font-size: 1.5rem; margin-bottom: 0.5rem; display: block; }
   .hero-card .card-title { font-size: 0.9rem; font-weight: 500; color: var(--ink); }
   .hero-card .card-sub { font-size: 0.78rem; color: var(--ink-light); margin-top: 0.2rem; }
- 
+
   .dot-badge {
     position: absolute;
     top: 1rem; right: 1rem;
@@ -237,14 +238,14 @@
     border-radius: 50%;
     background: var(--forest);
   }
- 
+
   /* SECTION LAYOUT */
   section {
     padding: 5rem 5vw;
     max-width: 1200px;
     margin: 0 auto;
   }
- 
+
   .section-label {
     font-size: 0.72rem;
     font-weight: 500;
@@ -256,7 +257,7 @@
     align-items: center;
     gap: 0.75rem;
   }
- 
+
   .section-label::before {
     content: '';
     display: block;
@@ -264,7 +265,7 @@
     height: 1px;
     background: var(--clay);
   }
- 
+
   .section-title {
     font-family: 'Playfair Display', serif;
     font-size: clamp(1.8rem, 3.5vw, 2.6rem);
@@ -274,7 +275,7 @@
     color: var(--ink);
     margin-bottom: 0.75rem;
   }
- 
+
   .section-sub {
     font-size: 1rem;
     color: var(--ink-mid);
@@ -282,14 +283,14 @@
     line-height: 1.7;
     margin-bottom: 3rem;
   }
- 
+
   /* ABOUT GRID */
   .about-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
     gap: 1rem;
   }
- 
+
   .hobby-card {
     background: var(--card-bg);
     border: 0.5px solid var(--border);
@@ -300,31 +301,31 @@
     transition: transform 0.25s, box-shadow 0.25s;
     cursor: default;
   }
- 
+
   .hobby-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 12px 32px rgba(42,36,32,0.08);
   }
- 
+
   .hobby-card .accent-bar {
     position: absolute;
     top: 0; left: 0; right: 0;
     height: 3px;
     border-radius: 16px 16px 0 0;
   }
- 
+
   .hobby-card .accent-bar.clay { background: var(--clay); }
   .hobby-card .accent-bar.forest { background: var(--forest); }
   .hobby-card .accent-bar.sand { background: var(--sand); }
   .hobby-card .accent-bar.ink { background: var(--ink-mid); }
- 
+
   .hobby-icon {
     font-size: 1.75rem;
     margin-bottom: 0.75rem;
     display: block;
     line-height: 1;
   }
- 
+
   .hobby-title {
     font-family: 'Playfair Display', serif;
     font-size: 1.15rem;
@@ -332,13 +333,13 @@
     color: var(--ink);
     margin-bottom: 0.4rem;
   }
- 
+
   .hobby-desc {
     font-size: 0.85rem;
     color: var(--ink-mid);
     line-height: 1.6;
   }
- 
+
   /* SKILLS */
   .skills-section {
     background: var(--ink);
@@ -347,23 +348,23 @@
     margin: 0;
     max-width: 100%;
   }
- 
+
   .skills-section .section-label { color: var(--sand); }
   .skills-section .section-label::before { background: var(--sand); }
   .skills-section .section-title { color: var(--warm-white); }
   .skills-section .section-sub { color: rgba(255,255,255,0.6); }
- 
+
   .skills-inner {
     max-width: 1200px;
     margin: 0 auto;
   }
- 
+
   .skills-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: 0.75rem;
   }
- 
+
   .skill-pill {
     background: rgba(255,255,255,0.07);
     border: 0.5px solid rgba(255,255,255,0.12);
@@ -371,33 +372,33 @@
     padding: 1rem 1.25rem;
     transition: background 0.2s, transform 0.2s;
   }
- 
+
   .skill-pill:hover {
     background: rgba(255,255,255,0.12);
     transform: translateY(-2px);
   }
- 
+
   .skill-pill .skill-name {
     font-size: 0.9rem;
     font-weight: 500;
     color: white;
     margin-bottom: 0.25rem;
   }
- 
+
   .skill-pill .skill-tag {
     font-size: 0.72rem;
     color: var(--sand);
     letter-spacing: 0.05em;
     text-transform: uppercase;
   }
- 
+
   /* PORTFOLIO */
   .portfolio-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 1.25rem;
   }
- 
+
   .project-card {
     background: var(--card-bg);
     border: 0.5px solid var(--border);
@@ -407,12 +408,12 @@
     display: flex;
     flex-direction: column;
   }
- 
+
   .project-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 16px 40px rgba(42,36,32,0.1);
   }
- 
+
   .project-thumb {
     height: 180px;
     display: flex;
@@ -422,26 +423,26 @@
     position: relative;
     overflow: hidden;
   }
- 
+
   .project-thumb.heat {
     background: linear-gradient(135deg, #FDE8D8 0%, #F5C4A1 50%, #E8956B 100%);
   }
- 
+
   .project-thumb.galton {
     background: linear-gradient(135deg, #D4E8DA 0%, #A8CDB5 50%, #6BA88A 100%);
   }
- 
+
   .project-thumb.quantum {
     background: linear-gradient(135deg, #D8D4F0 0%, #B8B2E0 50%, #8880C8 100%);
   }
- 
+
   .project-thumb-pattern {
     position: absolute;
     inset: 0;
     opacity: 0.15;
     background-size: 20px 20px;
   }
- 
+
   .project-thumb.heat .project-thumb-pattern {
     background-image: radial-gradient(circle, var(--clay-dark) 1px, transparent 1px);
   }
@@ -451,14 +452,14 @@
   .project-thumb.quantum .project-thumb-pattern {
     background-image: radial-gradient(circle, #4a3a8a 1px, transparent 1px);
   }
- 
+
   .project-body {
     padding: 1.5rem;
     flex: 1;
     display: flex;
     flex-direction: column;
   }
- 
+
   .project-tag {
     font-size: 0.7rem;
     font-weight: 500;
@@ -467,7 +468,7 @@
     color: var(--clay);
     margin-bottom: 0.5rem;
   }
- 
+
   .project-title {
     font-family: 'Playfair Display', serif;
     font-size: 1.2rem;
@@ -476,7 +477,7 @@
     line-height: 1.3;
     margin-bottom: 0.6rem;
   }
- 
+
   .project-desc {
     font-size: 0.875rem;
     color: var(--ink-mid);
@@ -484,7 +485,7 @@
     flex: 1;
     margin-bottom: 1.25rem;
   }
- 
+
   .project-link {
     display: inline-flex;
     align-items: center;
@@ -497,26 +498,26 @@
     padding-top: 1rem;
     transition: gap 0.2s, color 0.2s;
   }
- 
+
   .project-link:hover {
     gap: 0.65rem;
     color: var(--clay-dark);
   }
- 
+
   .project-link::after { content: '→'; }
- 
+
   /* CONTACT */
   .contact-section {
     background: var(--sand-light);
   }
- 
+
   .contact-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
     gap: 1rem;
     margin-top: 1rem;
   }
- 
+
   .contact-card {
     background: var(--card-bg);
     border: 0.5px solid var(--border-warm);
@@ -526,19 +527,19 @@
     display: block;
     transition: transform 0.2s, box-shadow 0.2s;
   }
- 
+
   .contact-card:hover {
     transform: translateY(-3px);
     box-shadow: 0 8px 24px rgba(196,113,74,0.12);
   }
- 
+
   .contact-icon {
     font-size: 1.5rem;
     display: block;
     margin-bottom: 0.75rem;
     line-height: 1;
   }
- 
+
   .contact-platform {
     font-size: 0.72rem;
     font-weight: 500;
@@ -547,13 +548,13 @@
     color: var(--ink-light);
     margin-bottom: 0.25rem;
   }
- 
+
   .contact-handle {
     font-size: 0.95rem;
     font-weight: 500;
     color: var(--ink);
   }
- 
+
   /* FOOTER */
   footer {
     background: var(--ink);
@@ -563,9 +564,9 @@
     font-size: 0.8rem;
     letter-spacing: 0.03em;
   }
- 
+
   footer span { color: var(--clay); }
- 
+
   /* CERT CARDS */
   .cert-card {
     background: var(--card-bg);
@@ -574,12 +575,12 @@
     padding: 1rem 1.25rem;
     transition: transform 0.2s, box-shadow 0.2s;
   }
- 
+
   .cert-card:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(42,36,32,0.07);
   }
- 
+
   .cert-name {
     font-size: 0.9rem;
     font-weight: 500;
@@ -587,13 +588,13 @@
     line-height: 1.4;
     margin-bottom: 0.3rem;
   }
- 
+
   .cert-issuer {
     font-size: 0.75rem;
     color: var(--ink-light);
     letter-spacing: 0.03em;
   }
- 
+
   /* BLOG CARDS */
   .blog-card {
     background: var(--card-bg);
@@ -605,12 +606,12 @@
     gap: 0.75rem;
     transition: transform 0.25s, box-shadow 0.25s;
   }
- 
+
   .blog-card:hover {
     transform: translateY(-4px);
     box-shadow: 0 12px 32px rgba(42,36,32,0.08);
   }
- 
+
   .blog-tag-pill {
     display: inline-block;
     font-size: 0.7rem;
@@ -621,7 +622,7 @@
     border-radius: 100px;
     width: fit-content;
   }
- 
+
   .blog-title {
     font-family: 'Playfair Display', serif;
     font-size: 1.05rem;
@@ -629,14 +630,14 @@
     color: var(--ink);
     line-height: 1.35;
   }
- 
+
   .blog-excerpt {
     font-size: 0.855rem;
     color: var(--ink-mid);
     line-height: 1.65;
     flex: 1;
   }
- 
+
   .blog-footer {
     border-top: 0.5px solid var(--border);
     padding-top: 0.85rem;
@@ -644,7 +645,7 @@
     align-items: center;
     justify-content: space-between;
   }
- 
+
   .blog-coming-soon {
     font-size: 0.75rem;
     font-weight: 500;
@@ -652,7 +653,7 @@
     letter-spacing: 0.05em;
     font-style: italic;
   }
- 
+
   .blog-read-more {
     font-size: 0.85rem;
     font-weight: 500;
@@ -663,10 +664,10 @@
     align-items: center;
     gap: 0.4rem;
   }
- 
+
   .blog-read-more:hover { color: var(--clay-dark); gap: 0.65rem; }
   .blog-read-more::after { content: '→'; }
- 
+
   /* PHOTO CARDS */
   .photo-card { position: relative; }
   .photo-card:hover img { transform: scale(1.04); }
@@ -688,7 +689,7 @@
     font-weight: 400;
     line-height: 1.4;
   }
- 
+
   /* DIVIDER */
   .divider {
     width: 100%;
@@ -697,16 +698,16 @@
     margin: 0 5vw;
     width: calc(100% - 10vw);
   }
- 
+
   /* ANIMATIONS */
   @keyframes fadeUp {
     from { opacity: 0; transform: translateY(20px); }
     to   { opacity: 1; transform: translateY(0); }
   }
- 
+
   .hero-text { animation: fadeUp 0.7s ease both; }
   .hero-visual { animation: fadeUp 0.7s 0.15s ease both; }
- 
+
   /* RESPONSIVE */
   @media (max-width: 768px) {
     .hero {
@@ -724,7 +725,7 @@
 </style>
 </head>
 <body>
- 
+
 <!-- NAV -->
 <nav>
   <a class="nav-logo" href="#top">Joseph Dumont</a>
@@ -738,7 +739,7 @@
     <li><a href="#contact">Contact</a></li>
   </ul>
 </nav>
- 
+
 <!-- HERO -->
 <div id="top" style="max-width:1200px; margin:0 auto;">
   <div class="hero">
@@ -753,7 +754,7 @@
         <a href="#contact" class="btn-secondary">Get in touch</a>
       </div>
     </div>
- 
+
     <div class="hero-visual" aria-hidden="true">
       <div class="hero-card large">
         <span class="card-icon">🌊</span>
@@ -780,13 +781,13 @@
     </div>
   </div>
 </div>
- 
+
 <!-- ABOUT -->
 <section id="about">
   <p class="section-label">About me</p>
   <h2 class="section-title">Life beyond the keyboard</h2>
   <p class="section-sub">I carve out time to stay curious — whether that's pushing through a run, diving into the ocean, capturing a moment through a lens, or tinkering with emerging tech.</p>
- 
+
   <div class="about-grid">
     <div class="hobby-card">
       <div class="accent-bar clay"></div>
@@ -794,28 +795,28 @@
       <div class="hobby-title">Athlete</div>
       <p class="hobby-desc">Running, cycling, and swimming fuel my competitive drive and keep me sharp. I've completed a sprint triathlon and am actively training toward an Ironman 70.3 — a goal that demands discipline, grit, and a love of the journey.</p>
     </div>
- 
+
     <div class="hobby-card">
       <div class="accent-bar forest"></div>
       <span class="hobby-icon">🌊</span>
       <div class="hobby-title">Underwater</div>
       <p class="hobby-desc">Sailing, snorkeling, and scuba diving around the ocean are core passions. The sea is where I feel most alive.</p>
     </div>
- 
+
     <div class="hobby-card">
       <div class="accent-bar sand"></div>
       <span class="hobby-icon">📷</span>
       <div class="hobby-title">Photography</div>
       <p class="hobby-desc">Traveling the world has given me the good fortune to capture incredible moments, from the dramatic cliffs of the Great Ocean Road in Australia to the serene sunrises of the North Atlantic shoreline.</p>
     </div>
- 
+
     <div class="hobby-card">
       <div class="accent-bar ink"></div>
       <span class="hobby-icon">🤖</span>
       <div class="hobby-title">Artificial Intelligence</div>
       <p class="hobby-desc">Passionate about the transformative potential of AI — from generative models to agentic systems — staying ahead of the curve by actively building, experimenting, and earning certifications in emerging technologies.</p>
     </div>
- 
+
     <div class="hobby-card">
       <div class="accent-bar" style="background: #6929C4;"></div>
       <span class="hobby-icon">⚛️</span>
@@ -824,24 +825,24 @@
     </div>
   </div>
 </section>
- 
+
 <!-- BLOG -->
 <section id="blog">
   <p class="section-label">Blog</p>
   <h2 class="section-title">Thoughts & perspectives</h2>
   <p class="section-sub">Musings on AI, product leadership, quantum computing, triathlon training, and whatever else is on my mind.</p>
- 
+
   <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.25rem;">
- 
+
     <div class="blog-card">
       <div class="blog-tag-pill" style="background: #EDD9CC; color: #8A4A2F;">Artificial Intelligence</div>
-      <div class="blog-title">Responsible AI: Why Ethics Can't Be an Afterthought</div>
+      <div class="blog-title">Why Responsible AI is the Bedrock of AI-Powered Applications</div>
       <p class="blog-excerpt">As AI becomes embedded in every product, responsible design and governance aren't optional extras — they're core product requirements.</p>
       <div class="blog-footer">
-        <span class="blog-coming-soon">Coming soon</span>
+        <a href="responsible-ai.html" class="blog-read-more">Read post</a>
       </div>
     </div>
- 
+
     <div class="blog-card">
       <div class="blog-tag-pill" style="background: #D0DDD5; color: #2A4A38;">Product Ownership</div>
       <div class="blog-title">Storytelling as a Superpower for Product Owners</div>
@@ -850,7 +851,7 @@
         <span class="blog-coming-soon">Coming soon</span>
       </div>
     </div>
- 
+
     <div class="blog-card">
       <div class="blog-tag-pill" style="background: #D8D4F0; color: #3A2F7A;">Quantum Computing</div>
       <div class="blog-title">My Quantum Journey: From Challenge Badges to Real Hardware</div>
@@ -859,7 +860,7 @@
         <span class="blog-coming-soon">Coming soon</span>
       </div>
     </div>
- 
+
     <div class="blog-card">
       <div class="blog-tag-pill" style="background: #FAC775; color: #633806;">Athletics & Triathlon</div>
       <div class="blog-title">Training for an Ironman 70.3: Lessons from a Sprint Triathlete</div>
@@ -868,19 +869,19 @@
         <span class="blog-coming-soon">Coming soon</span>
       </div>
     </div>
- 
+
   </div>
 </section>
- 
+
 <!-- SKILLS -->
 <div class="skills-section" id="skills">
   <div class="skills-inner">
     <p class="section-label">Skills &amp; Experience</p>
     <h2 class="section-title" style="color: #FFFDF9;">What I bring to the table</h2>
     <p class="section-sub" style="color: rgba(255,255,255,0.6); margin-bottom: 2rem;">A blend of client evangelism, product leadership, and proven technical experience to deliver modern tools to users.</p>
- 
+
     <div style="display: flex; flex-direction: column; gap: 2rem;">
- 
+
       <!-- AI -->
       <div>
         <div style="font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sand); margin-bottom: 0.75rem;">Artificial Intelligence</div>
@@ -894,7 +895,7 @@
           <div class="skill-pill"><div class="skill-name">Chatbot</div><div class="skill-tag">Artificial Intelligence</div></div>
         </div>
       </div>
- 
+
       <!-- Product -->
       <div>
         <div style="font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sand); margin-bottom: 0.75rem;">Product</div>
@@ -908,7 +909,7 @@
           <div class="skill-pill"><div class="skill-name">Manage KPIs</div><div class="skill-tag">Product</div></div>
         </div>
       </div>
- 
+
       <!-- Financial Services -->
       <div>
         <div style="font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sand); margin-bottom: 0.75rem;">Industry</div>
@@ -918,7 +919,7 @@
           <div class="skill-pill"><div class="skill-name">Telecom</div><div class="skill-tag">Industry</div></div>
         </div>
       </div>
- 
+
       <!-- Engineering & Tools -->
       <div>
         <div style="font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--sand); margin-bottom: 0.75rem;">Engineering &amp; Tools</div>
@@ -930,19 +931,19 @@
           <div class="skill-pill"><div class="skill-name">Data Visualization</div><div class="skill-tag">Analysis</div></div>
         </div>
       </div>
- 
+
     </div>
   </div>
 </div>
- 
+
 <!-- PORTFOLIO -->
 <section id="portfolio">
   <p class="section-label">Personal Project Portfolio</p>
   <h2 class="section-title">Projects I'm proud of</h2>
   <p class="section-sub">A selection of personal and technical projects built for professional growth and genuine curiosity.</p>
- 
+
   <div class="portfolio-grid">
- 
+
     <div class="project-card">
       <div class="project-thumb heat">
         <div class="project-thumb-pattern"></div>
@@ -955,7 +956,7 @@
         <a href="https://github.com/jdumont01/HeatEquation" class="project-link" target="_blank" rel="noopener">View on GitHub</a>
       </div>
     </div>
- 
+
     <div class="project-card">
       <div class="project-thumb galton">
         <div class="project-thumb-pattern"></div>
@@ -968,7 +969,7 @@
         <a href="https://github.com/jdumont01/GaltonBoard" class="project-link" target="_blank" rel="noopener">View on GitHub</a>
       </div>
     </div>
- 
+
     <!-- Quantum Summary Card -->
     <div class="project-card quantum-summary-card" id="quantumSummaryCard" onclick="toggleQuantumExpand()" style="cursor:pointer; grid-column: 1 / -1;">
       <div class="project-thumb quantum" style="height:140px;">
@@ -989,11 +990,11 @@
         </div>
       </div>
     </div>
- 
+
     <!-- Quantum Detail Cards (hidden by default) -->
     <div id="quantumDetails" style="display:none; grid-column: 1 / -1;">
       <div style="display:grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap:1.25rem; margin-top:0;">
- 
+
         <div class="project-card">
           <div class="project-thumb quantum" style="height:120px;">
             <div class="project-thumb-pattern"></div>
@@ -1005,7 +1006,7 @@
             <p class="project-desc">Quantum Fundamentals — an intensive summer program covering the foundations of quantum computing using Qiskit.</p>
           </div>
         </div>
- 
+
         <div class="project-card">
           <div class="project-thumb quantum" style="height:120px;">
             <div class="project-thumb-pattern"></div>
@@ -1018,7 +1019,7 @@
             <a href="https://research.ibm.com/blog/ibm-quantum-challenge-2024" class="project-link" target="_blank" rel="noopener">View challenge</a>
           </div>
         </div>
- 
+
         <div class="project-card">
           <div class="project-thumb quantum" style="height:120px;">
             <div class="project-thumb-pattern"></div>
@@ -1030,7 +1031,7 @@
             <p class="project-desc">Quantum Excellence — advanced coursework in quantum algorithms and circuit design as part of IBM's global quantum education initiative.</p>
           </div>
         </div>
- 
+
         <div class="project-card">
           <div class="project-thumb quantum" style="height:120px;">
             <div class="project-thumb-pattern"></div>
@@ -1042,7 +1043,7 @@
             <p class="project-desc">Advanced-level exploration of quantum computing concepts and techniques through IBM's Quantum Explorer program.</p>
           </div>
         </div>
- 
+
         <div class="project-card">
           <div class="project-thumb quantum" style="height:120px;">
             <div class="project-thumb-pattern"></div>
@@ -1055,7 +1056,7 @@
             <a href="https://research.ibm.com/blog/quantum-challenge-spring-2023" class="project-link" target="_blank" rel="noopener">View challenge</a>
           </div>
         </div>
- 
+
         <div class="project-card">
           <div class="project-thumb quantum" style="height:120px;">
             <div class="project-thumb-pattern"></div>
@@ -1068,13 +1069,13 @@
             <a href="https://research.ibm.com/blog/quantum-challenge-fall-2022" class="project-link" target="_blank" rel="noopener">View challenge</a>
           </div>
         </div>
- 
+
       </div>
     </div>
- 
+
   </div>
 </section>
- 
+
 <script>
   function toggleQuantumExpand() {
     const details = document.getElementById('quantumDetails');
@@ -1094,15 +1095,15 @@
     }
   }
 </script>
- 
+
 <!-- CERTIFICATIONS -->
 <section id="certifications">
   <p class="section-label">Certifications</p>
   <h2 class="section-title">Credentials &amp; Achievements</h2>
   <p class="section-sub">Verified certifications across cloud, quantum computing, and agile disciplines.</p>
- 
+
   <div style="display: flex; flex-direction: column; gap: 2.5rem;">
- 
+
     <!-- AWS -->
     <div>
       <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
@@ -1131,7 +1132,7 @@
         </div>
       </div>
     </div>
- 
+
     <!-- IBM Quantum -->
     <div>
       <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
@@ -1172,7 +1173,7 @@
         </div>
       </div>
     </div>
- 
+
     <!-- Scrum Alliance -->
     <div>
       <div style="display: flex; align-items: center; gap: 0.75rem; margin-bottom: 1rem;">
@@ -1193,18 +1194,18 @@
         </div>
       </div>
     </div>
- 
+
   </div>
 </section>
- 
+
 <!-- PHOTOGRAPHY -->
 <section id="photography">
   <p class="section-label">Photography</p>
   <h2 class="section-title">Through the lens</h2>
   <p class="section-sub">Snapshots from a life spent exploring — from the rugged coastlines of Australia to the tidal marshes of New England.</p>
- 
+
   <div style="display: grid; grid-template-columns: repeat(3, 1fr); grid-template-rows: auto auto; gap: 1rem;">
- 
+
     <!-- Large featured photo -->
     <div style="grid-column: 1 / 3; grid-row: 1; border-radius: 20px; overflow: hidden; position: relative; aspect-ratio: 16/9; cursor: pointer;" class="photo-card" onclick="openLightbox(0)">
       <img src="https://jdumont01.github.io/images/slider/LondonBridgeGreatOceanRoad2.jpg" alt="London Bridge - Great Ocean Road, Victoria, Australia" style="width:100%; height:100%; object-fit:cover; display:block; transition: transform 0.4s;">
@@ -1212,7 +1213,7 @@
         <div class="photo-caption">London Bridge — Great Ocean Road, Victoria, Australia</div>
       </div>
     </div>
- 
+
     <!-- Tall side photo -->
     <div style="grid-column: 3; grid-row: 1 / 3; border-radius: 20px; overflow: hidden; position: relative; cursor: pointer;" class="photo-card" onclick="openLightbox(1)">
       <img src="https://jdumont01.github.io/images/slider/WinterPlumIsland-2.jpg" alt="Parker River National Wildlife Refuge - Winter" style="width:100%; height:100%; object-fit:cover; display:block; transition: transform 0.4s;">
@@ -1220,7 +1221,7 @@
         <div class="photo-caption">Parker River National Wildlife Refuge — Winter</div>
       </div>
     </div>
- 
+
     <!-- Bottom row photos -->
     <div style="grid-column: 1; grid-row: 2; border-radius: 20px; overflow: hidden; position: relative; aspect-ratio: 4/3; cursor: pointer;" class="photo-card" onclick="openLightbox(2)">
       <img src="https://jdumont01.github.io/images/slider/lobster.jpg" alt="New England Lobster - Nubble Lighthouse Dive Site, York, Maine" style="width:100%; height:100%; object-fit:cover; display:block; transition: transform 0.4s;">
@@ -1228,16 +1229,16 @@
         <div class="photo-caption">New England Lobster — Nubble Lighthouse, York, Maine</div>
       </div>
     </div>
- 
+
     <div style="grid-column: 2; grid-row: 2; border-radius: 20px; overflow: hidden; position: relative; aspect-ratio: 4/3; cursor: pointer;" class="photo-card" onclick="openLightbox(3)">
       <img src="https://jdumont01.github.io/images/slider/PlumIslandSunrise.jpg" alt="Sunrise Over the North Atlantic Shoreline" style="width:100%; height:100%; object-fit:cover; display:block; transition: transform 0.4s;">
       <div class="photo-overlay">
         <div class="photo-caption">Sunrise Over the North Atlantic Shoreline</div>
       </div>
     </div>
- 
+
   </div>
- 
+
   <!-- Golden Gate as wide banner -->
   <div style="margin-top: 1rem; border-radius: 20px; overflow: hidden; position: relative; aspect-ratio: 21/7; cursor: pointer;" class="photo-card" onclick="openLightbox(4)">
     <img src="https://jdumont01.github.io/images/slider/GoldenGateBridge.jpg" alt="Golden Gate Bridge - San Francisco, California" style="width:100%; height:100%; object-fit:cover; display:block; transition: transform 0.4s;">
@@ -1245,9 +1246,9 @@
       <div class="photo-caption">Golden Gate Bridge — San Francisco, California</div>
     </div>
   </div>
- 
+
 </section>
- 
+
 <!-- LIGHTBOX -->
 <div id="lightbox" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.92); z-index:1000; align-items:center; justify-content:center; flex-direction:column;">
   <button onclick="closeLightbox()" style="position:absolute; top:1.5rem; right:1.5rem; background:rgba(255,255,255,0.1); border:none; color:white; font-size:1.5rem; width:44px; height:44px; border-radius:50%; cursor:pointer; line-height:1;">✕</button>
@@ -1257,7 +1258,7 @@
   <p id="lightbox-caption" style="color:rgba(255,255,255,0.75); font-size:0.9rem; margin-top:1rem; text-align:center;"></p>
   <p id="lightbox-counter" style="color:rgba(255,255,255,0.4); font-size:0.78rem; margin-top:0.4rem;"></p>
 </div>
- 
+
 <script>
   const photos = [
     { src: 'https://jdumont01.github.io/images/slider/LondonBridgeGreatOceanRoad2.jpg', caption: 'London Bridge — Great Ocean Road, Victoria, Australia' },
@@ -1267,32 +1268,32 @@
     { src: 'https://jdumont01.github.io/images/slider/GoldenGateBridge.jpg', caption: 'Golden Gate Bridge — San Francisco, California' }
   ];
   let currentPhoto = 0;
- 
+
   function openLightbox(index) {
     currentPhoto = index;
     showPhoto();
     document.getElementById('lightbox').style.display = 'flex';
     document.body.style.overflow = 'hidden';
   }
- 
+
   function closeLightbox() {
     document.getElementById('lightbox').style.display = 'none';
     document.body.style.overflow = '';
   }
- 
+
   function showPhoto() {
     document.getElementById('lightbox-img').src = photos[currentPhoto].src;
     document.getElementById('lightbox-caption').textContent = photos[currentPhoto].caption;
     document.getElementById('lightbox-counter').textContent = (currentPhoto + 1) + ' / ' + photos.length;
   }
- 
+
   function prevPhoto() { currentPhoto = (currentPhoto - 1 + photos.length) % photos.length; showPhoto(); }
   function nextPhoto() { currentPhoto = (currentPhoto + 1) % photos.length; showPhoto(); }
- 
+
   document.getElementById('lightbox').addEventListener('click', function(e) {
     if (e.target === this) closeLightbox();
   });
- 
+
   document.addEventListener('keydown', function(e) {
     if (document.getElementById('lightbox').style.display === 'flex') {
       if (e.key === 'ArrowLeft') prevPhoto();
@@ -1301,33 +1302,33 @@
     }
   });
 </script>
- 
+
 <!-- CONTACT -->
 <div class="contact-section" id="contact">
   <section style="max-width:1200px; margin:0 auto;">
     <p class="section-label">Contact</p>
     <h2 class="section-title">Let's connect</h2>
     <p class="section-sub">Find me across the web — always happy to talk tech, travel, or anything in between.</p>
- 
+
     <div class="contact-grid">
       <a href="https://www.linkedin.com/in/jdumont01" class="contact-card" target="_blank" rel="noopener">
         <span class="contact-icon">💼</span>
         <div class="contact-platform">LinkedIn</div>
         <div class="contact-handle">in/jdumont01</div>
       </a>
- 
+
       <a href="https://github.com/jdumont01" class="contact-card" target="_blank" rel="noopener">
         <span class="contact-icon">🐙</span>
         <div class="contact-platform">GitHub</div>
         <div class="contact-handle">github.com/jdumont01</div>
       </a>
- 
+
       <a href="https://twitter.com/joe_dumont1" class="contact-card" target="_blank" rel="noopener">
         <span class="contact-icon">🐦</span>
         <div class="contact-platform">Twitter / X</div>
         <div class="contact-handle">@joe_dumont1</div>
       </a>
- 
+
       <a href="http://jdumont01.github.io" class="contact-card" target="_blank" rel="noopener">
         <span class="contact-icon">🌐</span>
         <div class="contact-platform">Website</div>
@@ -1336,12 +1337,11 @@
     </div>
   </section>
 </div>
- 
+
 <!-- FOOTER -->
 <footer>
   <p>© 2025 <span>Joseph Dumont</span> · Built with care</p>
 </footer>
- 
+
 </body>
 </html>
- 
