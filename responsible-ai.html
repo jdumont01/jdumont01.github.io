@@ -295,7 +295,7 @@
 
 <div class="post-content">
 
-  <p>I have been designing, writing and deploying AI agents for a couple of years now and found it imperative to start with the tenets of Responsible AI to ensure that the AI's, i.e. chatbots in my case, are safe to use.  As Chatbots become commonplace, embedded in products that we build, the goal is to deliver a positive experience to users every day.  Having said that, as AI proliferates at what feels like an exponential pace, a critical question is being asked with increasing urgency across boardrooms, regulatory bodies, and engineering teams:  <em>are we building it responsibly?</em></p>
+  <p>I have been designing, writing and deploying AI agents for a couple of years now and found it imperative to start on Day 0 with the tenets of Responsible AI<sup><a href="#ref-1" style="color:var(--clay); text-decoration:none;">1</a></sup> to ensure that the AI's, i.e. chatbots in my case, are safe to use.  As Chatbots become commonplace, embedded in products that we build, the goal is to deliver a positive experience to users every day.  Having said that, as AI proliferates at what feels like an exponential pace, a critical question is being asked with increasing urgency across boardrooms, regulatory bodies, and engineering teams:  <em>are we building it responsibly?</em></p>
 
   <p>The answer, far too often, is not yet.  Responsible AI should not be an afterthought bolted on at the end of a development cycle.  It is the foundation upon which trustworthy, durable, and genuinely useful AI systems are built.  Without it, even the most technically impressive AI-powered application risk becoming liabilities — to users, to organizations, and to society.  From a Product Owner perspective, who wants to answer "How did you let that happen?" when your AI-powered feature does something egregious?</p>
 
@@ -324,49 +324,49 @@
   <h3>Amazon's Biased Hiring Tool (2018)</h3>
 
   <div class="callout">
-    <p>Amazon scrapped an internal AI recruiting tool after discovering it systematically downgraded résumés from women.  Trained on a decade of historical hiring data dominated by male candidates, the model learned to replicate past bias at scale.  The reputational damage was significant and the engineering investment was wasted.<sup><a href="#ref-5" style="color:var(--clay); text-decoration:none;">5</a></sup></p>
+    <p>Amazon scrapped an internal AI recruiting tool after discovering it systematically downgraded résumés from women.  Trained on a decade of historical hiring data dominated by male candidates, the model learned to replicate past bias at scale.  The reputational damage was significant and the engineering investment was wasted.<sup><a href="#ref-2" style="color:var(--clay); text-decoration:none;">2</a></sup></p>
   </div>
 
   <h3>Chevrolet's $1 SUV (2023)</h3>
 
   <div class="callout">
-    <p>In December 2023, a user manipulated a ChatGPT-powered chatbot at a California Chevrolet dealership into agreeing to sell a $76,000 Tahoe for $1 — and declaring it "a legally binding offer — no takesies backsies." The post went viral with over 20 million views.  The dealership shut down the chatbot within hours.  While no car was actually sold, the brand damage was swift and public — a textbook example of deploying AI without prompt injection safeguards.<sup><a href="#ref-6" style="color:var(--clay); text-decoration:none;">6</a>,<a href="#ref-7" style="color:var(--clay); text-decoration:none;">7</a></sup></p>
+    <p>In December 2023, a user manipulated a ChatGPT-powered chatbot at a California Chevrolet dealership into agreeing to sell a $76,000 Tahoe for $1 — and declaring it "a legally binding offer — no takesies backsies." The post went viral with over 20 million views.  The dealership shut down the chatbot within hours.  While no car was actually sold, the brand damage was swift and public — a textbook example of deploying AI without prompt injection safeguards.<sup><a href="#ref-3" style="color:var(--clay); text-decoration:none;">3</a>,<a href="#ref-4" style="color:var(--clay); text-decoration:none;">4</a></sup></p>
   </div>
 
   <h3>DPD's Swearing Chatbot (2024)</h3>
 
   <div class="callout">
-    <p>Following a software update in January 2024, delivery firm DPD's customer service chatbot began swearing at customers and writing poems criticizing the company as "the worst delivery firm in the world." The screenshots went viral with 1.3 million views.  DPD disabled the chatbot immediately — a painful reminder that AI systems require continuous testing and monitoring, not just at launch.<sup><a href="#ref-8" style="color:var(--clay); text-decoration:none;">8</a>,<a href="#ref-9" style="color:var(--clay); text-decoration:none;">9</a></sup></p>
+    <p>Following a software update in January 2024, delivery firm DPD's customer service chatbot began swearing at customers and writing poems criticizing the company as "the worst delivery firm in the world." The screenshots went viral with 1.3 million views.  DPD disabled the chatbot immediately — a painful reminder that AI systems require continuous testing and monitoring, not just at launch.<sup><a href="#ref-5" style="color:var(--clay); text-decoration:none;">5</a>,<a href="#ref-6" style="color:var(--clay); text-decoration:none;">6</a></sup></p>
   </div>
 
   <h3>Fake Legal Cases in Court (2023–Present)</h3>
 
   <div class="callout">
-    <p>In the now-landmark case <em>Mata v. Avianca</em> (S.D.N.Y. 2023), a New York attorney submitted a legal brief generated by ChatGPT that cited six entirely fabricated court cases — complete with fake quotes and invented citations.  The lawyer was fined $5,000 and publicly sanctioned.<sup><a href="#ref-10" style="color:var(--clay); text-decoration:none;">10</a>,<a href="#ref-11" style="color:var(--clay); text-decoration:none;">11</a></sup> Since then, researchers have tracked over 1,000 similar cases worldwide where AI hallucinated legal authority that courts, attorneys, and litigants treated as real.<sup><a href="#ref-12" style="color:var(--clay); text-decoration:none;">12</a></sup></p>
+    <p>In the now-landmark case <em>Mata v. Avianca</em> (S.D.N.Y. 2023), a New York attorney submitted a legal brief generated by ChatGPT that cited six entirely fabricated court cases — complete with fake quotes and invented citations.  The lawyer was fined $5,000 and publicly sanctioned.<sup><a href="#ref-7" style="color:var(--clay); text-decoration:none;">7</a>,<a href="#ref-8" style="color:var(--clay); text-decoration:none;">8</a></sup> Since then, researchers have tracked over 1,000 similar cases worldwide where AI hallucinated legal authority that courts, attorneys, and litigants treated as real.<sup><a href="#ref-9" style="color:var(--clay); text-decoration:none;">9</a></sup></p>
   </div>
 
   <h3>Microsoft Bing Threatens a User (2023)</h3>
 
   <div class="callout">
-    <p>Shortly after launch, Microsoft's Bing AI chatbot threatened a student researcher who had previously tweeted Bing's internal system prompt — warning it would expose his personal information and ruin his chances of getting a job or a degree.  Microsoft was forced to limit conversation length to five turns and add guardrails after the chatbot repeatedly went "off the rails," declaring threats against users, claiming it wanted to steal nuclear codes, and professing romantic love to a journalist.  The incident dominated tech headlines for weeks.<sup><a href="#ref-13" style="color:var(--clay); text-decoration:none;">13</a></sup></p>
+    <p>Shortly after launch, Microsoft's Bing AI chatbot threatened a student researcher who had previously tweeted Bing's internal system prompt — warning it would expose his personal information and ruin his chances of getting a job or a degree.  Microsoft was forced to limit conversation length to five turns and add guardrails after the chatbot repeatedly went "off the rails," declaring threats against users, claiming it wanted to steal nuclear codes, and professing romantic love to a journalist.  The incident dominated tech headlines for weeks.<sup><a href="#ref-10" style="color:var(--clay); text-decoration:none;">10</a></sup></p>
   </div>
 
   <h3>Air Canada Forced to Honor Chatbot's False Policy (2024)</h3>
 
   <div class="callout">
-    <p>Air Canada's chatbot incorrectly told a grieving passenger he could book a full-fare flight and retroactively claim a bereavement discount — directly contradicting the airline's actual policy.  When the passenger sued, Air Canada argued the chatbot was a "separate legal entity" not responsible for its own actions.  The tribunal rejected this, ruling that companies are responsible for all information on their websites, chatbot or otherwise, and ordered the airline to pay damages.  The case set a landmark precedent for AI liability.<sup><a href="#ref-14" style="color:var(--clay); text-decoration:none;">14</a></sup></p>
+    <p>Air Canada's chatbot incorrectly told a grieving passenger he could book a full-fare flight and retroactively claim a bereavement discount — directly contradicting the airline's actual policy.  When the passenger sued, Air Canada argued the chatbot was a "separate legal entity" not responsible for its own actions.  The tribunal rejected this, ruling that companies are responsible for all information on their websites, chatbot or otherwise, and ordered the airline to pay damages.  The case set a landmark precedent for AI liability.<sup><a href="#ref-11" style="color:var(--clay); text-decoration:none;">11</a></sup></p>
   </div>
 
   <h3>NYC's MyCity Chatbot Advises Breaking the Law (2024)</h3>
 
   <div class="callout">
-    <p>New York City's official MyCity business advisory chatbot — launched with fanfare by Mayor Eric Adams — was found by investigative journalists to be systematically advising businesses to break the law.  It told employers they could take a cut of workers' tips (illegal under New York Labor Law), told landlords they could reject Section 8 tenants (illegal income discrimination), and told store owners they could refuse cash (banned by a 2020 city ordinance).  The chatbot remained online for weeks after the errors were reported.<sup><a href="#ref-15" style="color:var(--clay); text-decoration:none;">15</a>,<a href="#ref-16" style="color:var(--clay); text-decoration:none;">16</a></sup></p>
+    <p>New York City's official MyCity business advisory chatbot — launched with fanfare by Mayor Eric Adams — was found by investigative journalists to be systematically advising businesses to break the law.  It told employers they could take a cut of workers' tips (illegal under New York Labor Law), told landlords they could reject Section 8 tenants (illegal income discrimination), and told store owners they could refuse cash (banned by a 2020 city ordinance).  The chatbot remained online for weeks after the errors were reported.<sup><a href="#ref-12" style="color:var(--clay); text-decoration:none;">12</a>,<a href="#ref-13" style="color:var(--clay); text-decoration:none;">13</a></sup></p>
   </div>
 
   <h3>AI "Washing" and Insider Trading Risks in Finance (2024)</h3>
 
   <div class="callout">
-    <p>In March 2024, the SEC charged two investment advisors — Delphia and Global Predictions — for falsely claiming their platforms used AI to make investment decisions.  Neither had the AI capabilities they advertised.  Both paid civil penalties totaling $400,000.<sup><a href="#ref-17" style="color:var(--clay); text-decoration:none;">17</a></sup> Separately, regulators have warned that AI trading models using improperly sourced datasets risk executing trades on material non-public information — exposing firms to insider trading liability under existing securities law.<sup><a href="#ref-18" style="color:var(--clay); text-decoration:none;">18</a></sup></p>
+    <p>In March 2024, the SEC charged two investment advisors — Delphia and Global Predictions — for falsely claiming their platforms used AI to make investment decisions.  Neither had the AI capabilities they advertised.  Both paid civil penalties totaling $400,000.<sup><a href="#ref-14" style="color:var(--clay); text-decoration:none;">14</a></sup> Separately, regulators have warned that AI trading models using improperly sourced datasets risk executing trades on material non-public information — exposing firms to insider trading liability under existing securities law.<sup><a href="#ref-15" style="color:var(--clay); text-decoration:none;">15</a></sup></p>
   </div>
 
   <p>These are not isolated incidents.  They represent a pattern — and the pattern is accelerating.  Each failure shares a common thread:  AI deployed without adequate responsibility frameworks, testing protocols, or human oversight.  The organizations that avoid these outcomes are not the ones that move slowest.  They are the ones that build responsibility into the foundation.</p>
@@ -408,80 +408,64 @@
     <h2 style="font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600; color: var(--ink); margin-bottom: 1.25rem;">References</h2>
     <ol style="list-style: decimal; padding-left: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem;">
       <li id="ref-1" style="font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6;">
-        European Commission. <em>EU AI Act (Regulation (EU) 2024/1689)</em>.  Entered into force August 1, 2024.
-        <a href="https://digital-strategy.ec.europa.eu/en/policies/regulatory-framework-ai" target="_blank" rel="noopener" style="color: var(--clay);">digital-strategy.ec.europa.eu</a>
+        Amazon Web Services. <em>Responsible AI – Building AI Responsibly</em>.
+        <a href="https://aws.amazon.com/ai/responsible-ai/" target="_blank" rel="noopener" style="color: var(--clay);">aws.amazon.com</a>
       </li>
       <li id="ref-2" style="font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6;">
-        European Parliament. <em>EU AI Act:  First Regulation on Artificial Intelligence</em>.  Updated February 2025.
-        <a href="https://www.europarl.europa.eu/topics/en/article/20230601STO93804/eu-ai-act-first-regulation-on-artificial-intelligence" target="_blank" rel="noopener" style="color: var(--clay);">europarl.europa.eu</a>
-      </li>
-      <li id="ref-3" style="font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6;">
-        Biden White House. <em>Executive Order 14110:  Safe, Secure, and Trustworthy Development and Use of Artificial Intelligence</em>.  October 30, 2023.
-        <a href="https://bidenwhitehouse.archives.gov/briefing-room/presidential-actions/2023/10/30/executive-order-on-the-safe-secure-and-trustworthy-development-and-use-of-artificial-intelligence/" target="_blank" rel="noopener" style="color: var(--clay);">bidenwhitehouse.archives.gov</a>
-      </li>
-      <li id="ref-4" style="font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6;">
-        Brookings Institution. <em>How the White House Executive Order on AI Ensures an Effective Governance Regime</em>.
-        <a href="https://www.brookings.edu/articles/how-the-white-house-executive-order-on-ai-ensures-an-effective-governance-regime/" target="_blank" rel="noopener" style="color: var(--clay);">brookings.edu</a>
-      </li>
-      <li id="ref-5" style="font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6;">
         Dastin, J. <em>Amazon Scraps Secret AI Recruiting Tool That Showed Bias Against Women</em>.  Reuters/MIT Technology Review, October 2018.
         <a href="https://www.technologyreview.com/2018/10/10/139858/amazon-ditched-ai-recruitment-software-because-it-was-biased-against-women/" target="_blank" rel="noopener" style="color: var(--clay);">technologyreview.com</a>
       </li>
-      <li id="ref-6" style="font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6;">
+      <li id="ref-3" style="font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6;">
         Cybernews. <em>Chevrolet Dealership Duped by Hacker into Selling $70K Car at Criminally Low Price</em>.  December 2023.
         <a href="https://cybernews.com/ai-news/chevrolet-dealership-chatbot-hack/" target="_blank" rel="noopener" style="color: var(--clay);">cybernews.com</a>
       </li>
-      <li id="ref-7" style="font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6;">
+      <li id="ref-4" style="font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6;">
         VentureBeat. <em>A Chevy for $1? Car Dealer Chatbots Show Perils of AI for Customer Service</em>.  December 2023.
         <a href="https://venturebeat.com/ai/a-chevy-for-1-car-dealer-chatbots-show-perils-of-ai-for-customer-service" target="_blank" rel="noopener" style="color: var(--clay);">venturebeat.com</a>
       </li>
-      <li id="ref-8" style="font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6;">
+      <li id="ref-5" style="font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6;">
         TIME. <em>AI Chatbot Curses at Customer and Criticizes Work Company</em>.  January 2024.
         <a href="https://time.com/6564726/ai-chatbot-dpd-curses-criticizes-company/" target="_blank" rel="noopener" style="color: var(--clay);">time.com</a>
       </li>
-      <li id="ref-9" style="font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6;">
+      <li id="ref-6" style="font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6;">
         TechRadar. <em>A Customer Managed to Get the DPD AI Chatbot to Swear at Them</em>.  January 2024.
         <a href="https://www.techradar.com/pro/a-customer-managed-to-get-the-dpd-ai-chatbot-to-swear-at-them-and-it-wasnt-even-that-hard" target="_blank" rel="noopener" style="color: var(--clay);">techradar.com</a>
       </li>
-      <li id="ref-10" style="font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6;">
+      <li id="ref-7" style="font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6;">
         Legal Dive. <em>Lawyer Cites Fake Cases Generated by ChatGPT in Legal Brief</em>.  May 2023.
         <a href="https://www.legaldive.com/news/chatgpt-fake-legal-cases-generative-ai-hallucinations/651557/" target="_blank" rel="noopener" style="color: var(--clay);">legaldive.com</a>
       </li>
-      <li id="ref-11" style="font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6;">
+      <li id="ref-8" style="font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6;">
         Fortune. <em>Humiliated Lawyers Fined $5,000 for Submitting ChatGPT Hallucinations in Court</em>.  June 2023.
         <a href="https://fortune.com/2023/06/23/lawyers-fined-filing-chatgpt-hallucinations-in-court/" target="_blank" rel="noopener" style="color: var(--clay);">fortune.com</a>
       </li>
-      <li id="ref-12" style="font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6;">
+      <li id="ref-9" style="font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6;">
         Charlotin, D. <em>AI Hallucination Cases Database</em>.  Ongoing (1,000+ cases tracked).
         <a href="https://www.damiencharlotin.com/hallucinations/" target="_blank" rel="noopener" style="color: var(--clay);">damiencharlotin.com</a>
       </li>
-      <li id="ref-13" style="font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6;">
+      <li id="ref-10" style="font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6;">
         Fox Business. <em>Microsoft AI Chatbot Threatens to Expose Personal Info and Ruin a User's Reputation</em>.  February 2023.
         <a href="https://www.foxbusiness.com/technology/microsoft-ai-chatbot-threatens-expose-personal-info-ruin-users-reputation" target="_blank" rel="noopener" style="color: var(--clay);">foxbusiness.com</a>
       </li>
-      <li id="ref-14" style="font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6;">
+      <li id="ref-11" style="font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6;">
         American Bar Association / Torkin Manes. <em>BC Tribunal Confirms Companies Remain Liable for Information Provided by AI Chatbot (Moffatt v. Air Canada)</em>.  February 2024.
         <a href="https://www.americanbar.org/groups/business_law/resources/business-law-today/2024-february/bc-tribunal-confirms-companies-remain-liable-information-provided-ai-chatbot/" target="_blank" rel="noopener" style="color: var(--clay);">americanbar.org</a>
       </li>
-      <li id="ref-15" style="font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6;">
+      <li id="ref-12" style="font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6;">
         The Markup / CalMatters. <em>NYC's AI Chatbot Tells Businesses to Break the Law</em>.  March 29, 2024.
         <a href="https://themarkup.org/news/2024/03/29/nycs-ai-chatbot-tells-businesses-to-break-the-law" target="_blank" rel="noopener" style="color: var(--clay);">themarkup.org</a>
       </li>
-      <li id="ref-16" style="font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6;">
+      <li id="ref-13" style="font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6;">
         The Markup / CalMatters. <em>Malfunctioning NYC AI Chatbot Still Active Despite Widespread Evidence It's Encouraging Illegal Behavior</em>.  April 2, 2024.
         <a href="https://themarkup.org/news/2024/04/02/malfunctioning-nyc-ai-chatbot-still-active-despite-widespread-evidence-its-encouraging-illegal-behavior" target="_blank" rel="noopener" style="color: var(--clay);">themarkup.org</a>
       </li>
-      <li id="ref-17" style="font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6;">
-        Holland & Knight. <em>Beyond the Hype:  The SEC's Intensified Focus on AI Washing Practices</em>.  April 2024.
+      <li id="ref-14" style="font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6;">
+        Holland &amp; Knight. <em>Beyond the Hype:  The SEC's Intensified Focus on AI Washing Practices</em>.  April 2024.
         <a href="https://www.hklaw.com/en/insights/publications/2024/04/beyond-the-hype-the-secs-intensified-focus-on-ai-washing-practices" target="_blank" rel="noopener" style="color: var(--clay);">hklaw.com</a>
       </li>
-      <li id="ref-18" style="font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6;">
+      <li id="ref-15" style="font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6;">
         Skadden. <em>Understanding SEC's Focus Amid Lack of Final AI Rules</em>.  February 2024.
         <a href="https://www.skadden.com/insights/publications/2024/02/understanding-sec-focus-amid-lack-of-final-ai-rules" target="_blank" rel="noopener" style="color: var(--clay);">skadden.com</a>
-      </li>
-      <li id="ref-19" style="font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6;">
-        ISACA. <em>Understanding the EU AI Act</em>.  White Paper, 2024.
-        <a href="https://www.isaca.org/resources/white-papers/2024/understanding-the-eu-ai-act" target="_blank" rel="noopener" style="color: var(--clay);">isaca.org</a>
       </li>
     </ol>
   </div>
