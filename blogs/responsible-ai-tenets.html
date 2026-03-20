@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Responsible AI in the Real World:  Ensuring Your AI Behaves the Way You Want it To — Joseph Dumont</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #FAF7F2;
+    --clay: #C4714A;
+    --clay-dark: #8A4A2F;
+    --clay-light: #EDD9CC;
+    --forest: #3A5C4A;
+    --forest-light: #D0DDD5;
+    --ink: #2A2420;
+    --ink-mid: #6B5E57;
+    --ink-light: #A8998F;
+    --border: rgba(42, 36, 32, 0.12);
+    --card-bg: #FFFFFF;
+    --page-bg: #FAF7F2;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--page-bg);
+    color: var(--ink);
+    font-size: 17px;
+    line-height: 1.75;
+  }
+
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(250, 247, 242, 0.92);
+    backdrop-filter: blur(12px);
+    border-bottom: 0.5px solid var(--border);
+    padding: 0 2rem;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .nav-back {
+    font-size: 0.85rem;
+    color: var(--clay);
+    text-decoration: none;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: gap 0.2s;
+  }
+
+  .nav-back:hover { gap: 0.65rem; }
+  .nav-back::before { content: '←'; }
+
+  .post-hero {
+    padding: 120px 2rem 3rem;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+
+  .post-tag {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    background: var(--clay-light);
+    color: var(--clay-dark);
+    padding: 4px 14px;
+    border-radius: 100px;
+    margin-bottom: 1.5rem;
+  }
+
+  .post-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4.5vw, 3rem);
+    font-weight: 600;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 1.25rem;
+  }
+
+  .post-meta {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    font-size: 0.85rem;
+    color: var(--ink-light);
+    padding-bottom: 2rem;
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .post-meta span { display: flex; align-items: center; gap: 0.4rem; }
+
+  .post-divider {
+    width: 40px;
+    height: 2px;
+    background: var(--clay);
+    margin: 2.5rem 0;
+    border-radius: 2px;
+  }
+
+  .post-content {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 0 2rem 6rem;
+  }
+
+  .post-content p {
+    font-size: 1.05rem;
+    color: var(--ink);
+    line-height: 1.85;
+    margin-bottom: 1.6rem;
+  }
+
+  .post-content h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 2.5rem 0 1rem;
+    letter-spacing: -0.01em;
+  }
+
+  .post-content h3 {
+    font-size: 1.05rem;
+    font-weight: 500;
+    color: var(--ink);
+    margin: 2rem 0 0.75rem;
+    letter-spacing: 0.01em;
+  }
+
+  blockquote {
+    border-left: 3px solid var(--clay);
+    margin: 2rem 0;
+    padding: 1rem 1.5rem;
+    background: var(--clay-light);
+    border-radius: 0 12px 12px 0;
+  }
+
+  blockquote p {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem !important;
+    font-style: italic;
+    color: var(--clay-dark) !important;
+    margin: 0 !important;
+    line-height: 1.65 !important;
+  }
+
+  .post-content ul {
+    margin: 0 0 1.6rem 1.5rem;
+    list-style: none;
+    padding: 0;
+  }
+
+  .post-content ul li {
+    font-size: 1.05rem;
+    color: var(--ink);
+    line-height: 1.75;
+    margin-bottom: 0.6rem;
+    padding-left: 1.25rem;
+    position: relative;
+  }
+
+  .post-content ul li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.65em;
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--clay);
+  }
+
+  /* TENET CARDS */
+  .tenet-card {
+    background: var(--card-bg);
+    border: 0.5px solid var(--border);
+    border-left: 4px solid var(--clay);
+    border-radius: 0 16px 16px 0;
+    padding: 1.5rem 1.75rem;
+    margin: 1.5rem 0;
+  }
+
+  .tenet-number {
+    font-size: 0.7rem;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--clay);
+    margin-bottom: 0.3rem;
+  }
+
+  .tenet-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.2rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.6rem;
+  }
+
+  .tenet-aws {
+    font-size: 0.8rem;
+    font-style: italic;
+    color: var(--ink-light);
+    margin-bottom: 0.75rem;
+    padding-bottom: 0.75rem;
+    border-bottom: 0.5px solid var(--border);
+  }
+
+  .tenet-desc {
+    font-size: 0.95rem;
+    color: var(--ink-mid);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* APPLICATION CARDS */
+  .application-card {
+    background: var(--card-bg);
+    border: 0.5px solid var(--border);
+    border-radius: 16px;
+    padding: 1.5rem 1.75rem;
+    margin: 1.5rem 0;
+  }
+
+  .application-story {
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--ink-light);
+    margin-bottom: 0.4rem;
+  }
+
+  .application-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 0.5rem;
+  }
+
+  .application-tenets {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+    margin-bottom: 0.85rem;
+  }
+
+  .tenet-badge {
+    font-size: 0.7rem;
+    font-weight: 500;
+    background: var(--clay-light);
+    color: var(--clay-dark);
+    padding: 3px 10px;
+    border-radius: 100px;
+    letter-spacing: 0.04em;
+  }
+
+  .application-desc {
+    font-size: 0.95rem;
+    color: var(--ink-mid);
+    line-height: 1.7;
+    margin: 0;
+  }
+
+  /* CALLOUT */
+  .callout {
+    background: var(--card-bg);
+    border: 0.5px solid var(--border);
+    border-left: 3px solid var(--clay);
+    border-radius: 0 12px 12px 0;
+    padding: 1.25rem 1.5rem;
+    margin: 2rem 0;
+  }
+
+  .callout p {
+    margin: 0 !important;
+    font-size: 0.95rem !important;
+    color: var(--ink-mid) !important;
+    line-height: 1.7 !important;
+  }
+
+  /* SUMMARY BOX */
+  .summary-box {
+    background: var(--forest-light);
+    border-radius: 16px;
+    padding: 1.5rem 1.75rem;
+    margin: 2rem 0;
+    border: 0.5px solid rgba(58, 92, 74, 0.2);
+  }
+
+  .summary-box p {
+    font-size: 0.95rem !important;
+    color: var(--forest) !important;
+    margin: 0 !important;
+    line-height: 1.75 !important;
+  }
+
+  .summary-box strong { color: var(--forest); }
+
+  /* FOOTER */
+  .post-footer {
+    max-width: 780px;
+    margin: 0 auto;
+    padding: 2rem 2rem 4rem;
+    border-top: 0.5px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1rem;
+  }
+
+  .author-block { display: flex; align-items: center; gap: 1rem; }
+
+  .author-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: var(--clay);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: white;
+    flex-shrink: 0;
+  }
+
+  .author-name { font-weight: 500; font-size: 0.95rem; color: var(--ink); }
+  .author-title { font-size: 0.8rem; color: var(--ink-light); margin-top: 0.15rem; }
+
+  .back-btn {
+    background: var(--clay);
+    color: white;
+    padding: 0.65rem 1.5rem;
+    border-radius: 100px;
+    text-decoration: none;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: background 0.2s;
+  }
+
+  .back-btn:hover { background: var(--clay-dark); }
+
+  @media (max-width: 640px) {
+    .post-hero, .post-content { padding-left: 1.25rem; padding-right: 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="../index.html">Joseph Dumont</a>
+  <a class="nav-back" href="../index.html#blog">Back to blog</a>
+</nav>
+
+<div class="post-hero">
+  <span class="post-tag">Artificial Intelligence</span>
+  <h1 class="post-title">Responsible AI in the Real World:  Ensuring Your AI Behaves the Way You Want it To</h1>
+  <div class="post-meta">
+    <span>✍ Joseph Dumont</span>
+    <span>📅 March 2026</span>
+    <span>⏱ 7 min read</span>
+  </div>
+</div>
+
+<div class="post-content">
+
+  <div class="summary-box">
+    <p><strong>Previously:</strong> In <a href="responsible-ai.html" style="color: var(--forest); font-weight: 500;">Why Responsible AI is the Bedrock of AI-Powered Applications</a>, I talked about why Responsible AI is so important.  I gave examples of times when AI did not work as it should.  These examples showed that AI can fail when it is not designed and tested correctly.  In this post I want to talk about how to make sure your AI works the way you want it to.</p>
+  </div>
+
+  <div style="background: #fff8e1; border-left: 4px solid #f0a500; border-radius: 0 12px 12px 0; padding: 1rem 1.5rem; margin: 1.5rem 0;">
+    <p style="font-size: 0.9rem; color: #6b5000; margin: 0; line-height: 1.7;"><strong style="color: #6b5000;">Important Note:</strong> This blog is intended for informational and educational purposes only.  It does not constitute legal advice and should not be relied upon as such.  For any legal concerns related to AI compliance, data privacy, or regulatory obligations, please consult a qualified legal professional.</p>
+  </div>
+
+  <p>Knowing that Responsible AI is important is one thing.  As I have learned over the last 2+ years, doing it right is another issue.  Honestly, I had my doubts about how much overhead would be added when we built out our second PoC.  But including Responsible AI at the start made it so much easier to design a safe AI feature rather than bolting on "add-ons" later on an as-needed basis.</p>
+
+  <p>There are several groups that describe the tenets of Responsible AI.  Since I started with AWS' definitions,<sup><a href="#ref-1" style="color:var(--clay); text-decoration:none;">1</a></sup> I am going to use these through this blog.  They define Responsible AI to be eight interconnected parts, which act like a checklist validating the behavior of your AI feature.  Your job as a product leader is to make <em>deliberate</em> choices about each one, rather than letting them happen by default.  In the following section, I am going to cover each of the tenets, and describe how 1 or more of them might have been used to address the issues raised in each story described in the previous post.<sup><a href="#ref-3" style="color:var(--clay); text-decoration:none;">3</a></sup></p>
+
+  <div class="post-divider"></div>
+
+  <h2>What is Responsible AI?</h2>
+
+  <p>Responsible AI nudges you to ask a deceptively simple question:  <em>who will use the AI feature?</em>  It is a way to think about AI so that your clients feel safe using it; it is not a single feature or idea.  The focus of Responsible AI is to ensure your AI feature is fair, transparent and explainable.</p>
+  <p>If the AI feature:</p>
+  <ul>
+    <li>works well for some people but not others then you may have a bias issue</li>
+    <li>works well when you test it in a controlled environment, but does not behave the way you want when a human is interacting with it then you may have security, veracity and safety issues</li>
+    <li>works well with static prompts during development, but generates results that you cannot understand or that are false, then you might have robustness and explainability issues</li>
+  </ul>
+
+  <blockquote>
+    <p>Responsible AI is focused on building AI-powered features people can trust, not about slowing down innovation.</p>
+  </blockquote>
+
+  <p>Let's review the eight tenets of Responsible AI defined by AWS.  Think of them as a checklist you run against every AI feature you either build or buy throughout its lifetime.</p>
+
+  <div class="post-divider"></div>
+
+  <h2>The 8 Tenets of Responsible AI</h2>
+
+  <div class="tenet-card">
+    <div class="tenet-title">Fairness</div>
+    <p class="tenet-desc">Fairness means your AI feature treats everyone equally, regardless of race, gender, age, socioeconomic status, etc.  From the point of view of a Product Owner, you need to ensure that your data is representative of all the people using the AI-powered feature.</p>
+  </div>
+
+  <div class="tenet-card">
+    <div class="tenet-title">Explainability</div>
+    <p class="tenet-desc">Explainability means that you can answer "why did the AI do that?" so that anyone can understand how a result was generated.  There are two groups that need this information:
+  <ul>
+    <li>your internal teams for data gathering and debugging</li>
+    <li>your end users who want to know why a certain result was generated</li>
+  </ul></p>
+  </div>
+
+  <div class="tenet-card">
+    <div class="tenet-title">Privacy and Security</div>
+    <p class="tenet-desc">Privacy and security means ensuring that personal data is:</p>
+    <ul>
+      <li>collected with informed consent</li>
+      <li>used only for its stated purpose</li>
+      <li>protected in transit and at rest</li>
+    </ul>
+    <p class="tenet-desc">Here are a couple of things to consider when choosing a model:</p>
+    <ul>
+      <li>will the model use your data for training purposes?</li>
+      <li>will my prompts be directed to regions outside of the country where my data should not reside?</li>
+    </ul>
+  </div>
+
+  <div class="tenet-card">
+    <div class="tenet-title">Safety</div>
+    <p class="tenet-desc">Safety means your AI feature can process harmful input without producing harmful outputs like:  profanity, violence, misinformation, illegal advice, self-harm instructions, or content that endangers users.</p>
+    <p class="tenet-desc">Safety requires some form of guardrails like:</p>
+    <ul>
+      <li>input and output filters</li>
+      <li>disallowed topics</li>
+      <li>forbidden words or phrases</li>
+    </ul>
+    <p class="tenet-desc">The Safety tenet requires continuous monitoring for the lifetime of the AI-feature even if the feature is safe at launch.  Over time model updates, new user behavior patterns, or a deliberate adversarial prompt, may affect the behavior of the AI-feature.</p>
+  </div>
+
+  <div class="tenet-card">
+    <div class="tenet-title">Controllability</div>
+    <p class="tenet-desc">Controllability means you have the ability to:</p>
+    <ul>
+      <li>observe how the AI feature behaves (input, Chain of Thought, output)</li>
+      <li>intervene when it behaves unexpectedly</li>
+      <li>adjust the behavior</li>
+      <li>shut it down if necessary</li>
+    </ul>
+    <p class="tenet-desc">From a Product Owner's point of view, we need to ensure the AI's behavior remains consistent over time, and remains adaptable so that it can continue to represent the brand positively.</p>
+  </div>
+
+  <div class="tenet-card">
+    <div class="tenet-title">Veracity and Robustness</div>
+    <p class="tenet-desc">Veracity means the AI produces accurate, truthful outputs whereas Robustness means the AI maintains that accuracy even when inputs are unusual, or deliberately malicious.</p>
+    <p class="tenet-desc">An example of a veracity issue is Hallucination:  factually wrong outputs most likely generated by an LLM based on its training data.</p>
+    <p class="tenet-desc">An example of an issue with Robustness is Prompt injection as a malicious input manipulates the model into ignoring its instructions.</p>
+    <p class="tenet-desc">Both of these issues can be mitigated through retrieval-augmented generation (RAG), output validation, fact-checking pipelines, and adversarial testing before deployment.</p>
+  </div>
+
+  <div class="tenet-card">
+    <div class="tenet-title">Governance</div>
+    <p class="tenet-desc">Governance means incorporating Responsible AI best practices into the design, development, and operation of your AI-powered features.  As a Product Owner, this translates into establishing clear standards and processes for how your team builds and maintains AI features that use models (e.g. LLMs and embedding models).</p>
+    <p class="tenet-desc">In practice, Governance looks like:</p>
+    <ul>
+      <li>defining who owns the Responsible AI requirements for each AI feature</li>
+      <li>including Responsible AI acceptance criteria in your definition of done</li>
+      <li>conducting regular reviews of AI feature behavior as models and usage patterns evolve</li>
+      <li>maintaining documentation of the decisions made — what guardrails were applied, why, and what was tested</li>
+      <li>ensuring your team understands the terms of the LLM provider you are using, including data handling and model update policies</li>
+    </ul>
+    <p class="tenet-desc">Governance is how Responsible AI moves from intention to practice.</p>
+  </div>
+
+  <div class="tenet-card">
+    <div class="tenet-title">Transparency</div>
+    <p class="tenet-desc">Transparency means everyone using the AI feature knows that they are interacting with an AI.  The users will need to understand what the AI feature can and cannot do, and have enough information to make informed decisions about whether and how to engage with it.  Transparency is the foundation of informed consent, which in turn, is the foundation of trust.</p>
+  </div>
+
+  <div class="post-divider"></div>
+
+  <h2>A Framework, Not a Finish Line</h2>
+
+  <p>When I read the tenets of Responsible AI framework a while ago, the proverbial lightbulb turned on.  First I found the Responsible AI framework to be practical; it just made sense.  It identified issues that would keep a Product Owner up at night like hidden biases, malicious prompting, etc.  Second, applying the tenets on Day 0 directed the design to mandate features like Guardrails, and selecting and configuring the right LLM.  Third, the tenets become product requirements that can be tested, and audited via KPIs.</p>
+
+  <p>The eight tenets are not independent either.  They reinforce each other.  An AI feature with strong Governance produces better Transparency.  An AI feature with rigorous Veracity supports Explainability.  An AI feature built with Fairness in mind tends to be more Robust.</p>
+
+  <blockquote>
+    <p>The organizations that get this right are not the ones with the biggest AI budgets.  They are the ones that treat Responsible AI as a product discipline — with owners, metrics, milestones, and accountability — just like any other feature.</p>
+  </blockquote>
+
+  <p>As I conclude this blog, I want to share that I have designed, developed, and deployed AI features as both PoCs (Proof-of-Concepts) and MVPs (Minimal Viable Products).  One of the most important lessons I learned is that the time to think about Responsible AI is before you write a single line of code.  I believe that each of the failures described in the previous post could have been prevented by simply asking the right questions on Day 0.</p>
+
+  <p>So, start with the eight tenets and ask which apply to your use case.  Then, assign an owner to each and build them into your definition of done.  After your AI feature is deployed, revisit the tenets every time there is a model change, the behavior needs to be redefined, or the use cases expands.  That is what it means to build AI responsibly.</p>
+
+  <div class="post-divider"></div>
+
+
+
+</div>
+
+<div style="max-width: 780px; margin: 0 auto; padding: 0 2rem 3rem;">
+  <div style="border-top: 0.5px solid var(--border); padding-top: 2rem;">
+    <h2 style="font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600; color: var(--ink); margin-bottom: 1.25rem;">References</h2>
+    <ol style="list-style: decimal; padding-left: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem;">
+      <li id="ref-1" style="font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6;">
+        Amazon Web Services. <em>Responsible AI – Building AI Responsibly</em>.
+        <a href="https://aws.amazon.com/ai/responsible-ai/" target="_blank" rel="noopener" style="color: var(--clay);">aws.amazon.com</a>
+      </li>
+      <li id="ref-2" style="font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6;">
+        Amazon Web Services. <em>AWS Well-Architected Responsible AI Lens</em>.
+        <a href="https://aws.amazon.com/blogs/machine-learning/announcing-the-aws-well-architected-responsible-ai-lens/" target="_blank" rel="noopener" style="color: var(--clay);">aws.amazon.com</a>
+      </li>
+      <li id="ref-3" style="font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6;">
+        Dumont, J. <em>Why Responsible AI is the Bedrock of AI-Powered Applications</em>.  March 2026.
+        <a href="responsible-ai.html" style="color: var(--clay);">jdumont01.github.io</a>
+      </li>
+    </ol>
+  </div>
+</div>
+
+<div class="post-footer">
+  <div class="author-block">
+    <div class="author-avatar">JD</div>
+    <div>
+      <div class="author-name">Joseph Dumont</div>
+      <div class="author-title">Full Lifecycle Product Owner</div>
+    </div>
+  </div>
+  <a href="../index.html#blog" class="back-btn">← Back to blog</a>
+</div>
+
+<script data-goatcounter="https://jdumont01.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+</body>
+</html>
