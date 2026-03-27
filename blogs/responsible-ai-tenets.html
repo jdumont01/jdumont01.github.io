@@ -192,7 +192,6 @@
     background: var(--clay);
   }
 
-  /* TENET CARDS */
   .tenet-card {
     background: var(--card-bg);
     border: 0.5px solid var(--border);
@@ -200,15 +199,6 @@
     border-radius: 0 16px 16px 0;
     padding: 1.5rem 1.75rem;
     margin: 1.5rem 0;
-  }
-
-  .tenet-number {
-    font-size: 0.7rem;
-    font-weight: 500;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--clay);
-    margin-bottom: 0.3rem;
   }
 
   .tenet-title {
@@ -219,15 +209,6 @@
     margin-bottom: 0.6rem;
   }
 
-  .tenet-aws {
-    font-size: 0.8rem;
-    font-style: italic;
-    color: var(--ink-light);
-    margin-bottom: 0.75rem;
-    padding-bottom: 0.75rem;
-    border-bottom: 0.5px solid var(--border);
-  }
-
   .tenet-desc {
     font-size: 0.95rem;
     color: var(--ink-mid);
@@ -235,57 +216,6 @@
     margin: 0;
   }
 
-  /* APPLICATION CARDS */
-  .application-card {
-    background: var(--card-bg);
-    border: 0.5px solid var(--border);
-    border-radius: 16px;
-    padding: 1.5rem 1.75rem;
-    margin: 1.5rem 0;
-  }
-
-  .application-story {
-    font-size: 0.72rem;
-    font-weight: 500;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    color: var(--ink-light);
-    margin-bottom: 0.4rem;
-  }
-
-  .application-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.1rem;
-    font-weight: 600;
-    color: var(--ink);
-    margin-bottom: 0.5rem;
-  }
-
-  .application-tenets {
-    display: flex;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-    margin-bottom: 0.85rem;
-  }
-
-  .tenet-badge {
-    font-size: 0.7rem;
-    font-weight: 500;
-    background: var(--clay-light);
-    color: var(--clay-dark);
-    padding: 3px 10px;
-    border-radius: 100px;
-    letter-spacing: 0.04em;
-  }
-
-  .application-desc {
-    font-size: 0.95rem;
-    color: var(--ink-mid);
-    line-height: 1.7;
-    margin: 0;
-  }
-
-  /* CALLOUT */
   .callout {
     background: var(--card-bg);
     border: 0.5px solid var(--border);
@@ -302,7 +232,6 @@
     line-height: 1.7 !important;
   }
 
-  /* SUMMARY BOX */
   .summary-box {
     background: var(--forest-light);
     border-radius: 16px;
@@ -320,7 +249,6 @@
 
   .summary-box strong { color: var(--forest); }
 
-  /* FOOTER */
   .post-footer {
     max-width: 780px;
     margin: 0 auto;
@@ -420,21 +348,26 @@
   <div class="post-divider"></div>
 
   <h2>The 8 Tenets of Responsible AI</h2>
-  <p>Let's review the eight tenets of Responsible AI defined by AWS.  Think of them as a checklist you run against every AI feature you either build or buy throughout its lifetime.</p>
-  <img src="../images/Responsible_AI_Lifecycle.png">
+
+  <p>Let's review the eight tenets of Responsible AI defined by AWS. Think of them as a checklist you run against every AI feature you either build or buy throughout its lifetime.</p>
+
+  <div style="margin:2rem 0; text-align:center;">
+    <img src="../images/blog/Responsible_AI_Lifecycle.png" alt="Responsible AI Applied Across the AI Feature Lifecycle" style="max-width:100%; border-radius:12px; border:0.5px solid var(--border);" />
+    <p style="font-size:0.8rem; color:var(--ink-light); margin-top:0.75rem;">Figure 1: All of the tenets of Responsible AI are constantly applied for the entire lifecycle of the feature. Monitoring the behavior of the AI and measuring user feedback is key to ensuring the AI is meeting the user's needs.</p>
+  </div>
 
   <div class="tenet-card">
     <div class="tenet-title">Fairness</div>
-    <p class="tenet-desc">Fairness means your AI feature treats everyone equally, regardless of race, gender, age, socioeconomic status, etc.  From the point of view of a Product Owner, you need to ensure that your data is representative of all the people using the AI-powered feature.</p>
+    <p class="tenet-desc">Fairness means your AI feature treats everyone equally, regardless of race, gender, age, socioeconomic status, etc.  From the point of view of a Product Owner, you need to ensure that your design and prompt/response testing is representative of all the people using the AI-powered feature.</p>
   </div>
 
   <div class="tenet-card">
     <div class="tenet-title">Explainability</div>
-    <p class="tenet-desc">Explainability means that you can answer "why did the AI do that?" so that anyone can understand how a result was generated.  There are two groups that need this information:
-  <ul>
-    <li>your internal teams for data gathering and debugging</li>
-    <li>your end users who want to know why a certain result was generated</li>
-  </ul></p>
+    <p class="tenet-desc">Explainability means that you can answer "why did the AI do that?" so that anyone can understand how a result was generated.  There are two groups that need this information:</p>
+    <ul>
+      <li>your internal teams for data gathering and debugging</li>
+      <li>your end users who want to know why a certain result was generated</li>
+    </ul>
   </div>
 
   <div class="tenet-card">
@@ -447,7 +380,7 @@
     </ul>
     <p class="tenet-desc">Here are a couple of things to consider when choosing a model:</p>
     <ul>
-      <li>will the model use your data for training purposes?</li>
+      <li>will the model use your data for training purposes; that is to train future versions of the model?</li>
       <li>will my prompts be directed to regions outside of the country where my data should not reside?</li>
     </ul>
   </div>
@@ -461,46 +394,54 @@
       <li>disallowed topics</li>
       <li>forbidden words or phrases</li>
     </ul>
-    <p class="tenet-desc">The Safety tenet requires continuous monitoring for the lifetime of the AI-feature even if the feature is safe at launch.  Over time model updates, new user behavior patterns, or a deliberate adversarial prompt, may affect the behavior of the AI-feature.</p>
+    <p class="tenet-desc">The Safety tenet requires continuous monitoring for the lifetime of the AI feature even if the feature is safe at launch.  Over time model updates, new user behavior patterns, or a deliberate adversarial prompt, may affect the behavior of the AI feature.</p>
   </div>
 
   <div class="tenet-card">
     <div class="tenet-title">Controllability</div>
     <p class="tenet-desc">Controllability means you have the ability to:</p>
     <ul>
-      <li>observe how the AI feature behaves (input, Chain of Thought, output)</li>
+      <li>observe how the AI feature behaves</li>
       <li>intervene when it behaves unexpectedly</li>
       <li>adjust the behavior</li>
       <li>shut it down if necessary</li>
     </ul>
-    <p class="tenet-desc">From a Product Owner's point of view, we need to ensure the AI's behavior remains consistent over time, and remains adaptable so that it can continue to represent the brand positively.</p>
+    <p class="tenet-desc">From a Product Owner's point of view, the AI's behavior must remain consistent over time, and remain adaptable so that it can continue to represent the brand favorably.</p>
   </div>
 
   <div class="tenet-card">
     <div class="tenet-title">Veracity and Robustness</div>
     <p class="tenet-desc">Veracity means the AI produces accurate, truthful outputs whereas Robustness means the AI maintains that accuracy even when inputs are unusual, or deliberately malicious.</p>
-    <p class="tenet-desc">An example of a veracity issue is Hallucination:  factually wrong outputs most likely generated by an LLM based on its training data.</p>
-    <p class="tenet-desc">An example of an issue with Robustness is Prompt injection as a malicious input manipulates the model into ignoring its instructions.</p>
+    <ul>
+      <li>An output that is factually wrong is an example of a common veracity issue called Hallucination. It most likely results when an LLM relies on its training data to "fill in the holes" when generating a response.</li>
+      <li>An example of a Robustness issue is Prompt injection. This occurs when malicious input manipulates the model into ignoring its instructions. The result is the AI may not behave as intended like generating unprofessional responses that may upset the user.</li>
+    </ul>
     <p class="tenet-desc">Both of these issues can be mitigated through retrieval-augmented generation (RAG), output validation, fact-checking pipelines, and adversarial testing before deployment.</p>
   </div>
 
   <div class="tenet-card">
     <div class="tenet-title">Governance</div>
-    <p class="tenet-desc">Governance means incorporating Responsible AI best practices into the design, development, and operation of your AI-powered features.  As a Product Owner, this translates into establishing clear standards and processes for how your team builds and maintains AI features that use models (e.g. LLMs and embedding models).</p>
+    <p class="tenet-desc">Governance means incorporating Responsible AI best practices into the design, development, and operation of your AI-powered features.  As a Product Owner, this translates into establishing clear standards and processes for how your team builds and maintains AI features that use models.</p>
     <p class="tenet-desc">In practice, Governance looks like:</p>
     <ul>
       <li>defining who owns the Responsible AI requirements for each AI feature</li>
       <li>including Responsible AI acceptance criteria in your definition of done</li>
       <li>conducting regular reviews of AI feature behavior as models and usage patterns evolve</li>
-      <li>maintaining documentation of the decisions made — what guardrails were applied, why, and what was tested</li>
-      <li>ensuring your team understands the terms of the LLM provider you are using, including data handling and model update policies</li>
+      <li>maintaining documentation of the decisions made</li>
+      <li>ensuring your team understands the terms of the LLM provider you are using</li>
     </ul>
     <p class="tenet-desc">Governance is how Responsible AI moves from intention to practice.</p>
   </div>
 
   <div class="tenet-card">
     <div class="tenet-title">Transparency</div>
-    <p class="tenet-desc">Transparency means everyone using the AI feature knows that they are interacting with an AI.  The users will need to understand what the AI feature can and cannot do, and have enough information to make informed decisions about whether and how to engage with it.  Transparency is the foundation of informed consent, which in turn, is the foundation of trust.</p>
+    <p class="tenet-desc">Transparency means everyone using the AI feature knows that they are interacting with an AI.  The users will need to understand what the AI feature can and cannot do, and have enough information to make informed decisions about whether and how to engage with it.</p>
+    <p class="tenet-desc">Including a statement like:</p>
+    <ul>
+      <li>MyProduct-AI can make mistakes. Check important info.</li>
+      <li>You are using AI technology.</li>
+    </ul>
+    <p class="tenet-desc">Transparency is the foundation of informed consent, which in turn, is the foundation of trust.</p>
   </div>
 
   <div class="post-divider"></div>
@@ -517,12 +458,9 @@
 
   <p>As I conclude this blog, I want to share that I have designed, developed, and deployed AI features as both PoCs (Proof-of-Concepts) and MVPs (Minimal Viable Products).  One of the most important lessons I learned is that the time to think about Responsible AI is before you write a single line of code.  I believe that each of the failures described in the previous post could have been prevented by simply asking the right questions on Day 0.</p>
 
-  <p>So, start with the eight tenets and ask which apply to your use case.  Then, assign an owner to each and build them into your definition of done.  After your AI feature is deployed, revisit the tenets every time there is a model change, the behavior needs to be redefined, or the use cases expands.  That is what it means to build AI responsibly.</p>
+  <p>So, start with the eight tenets and ask which apply to your use case.  Then, assign an owner to each and build them into your definition of done.  After your AI feature is deployed, revisit the tenets every time there is a model change, the behavior needs to be redefined, or the use case expands.  That is what it means to build AI responsibly.</p>
 
   <div class="post-divider"></div>
-
-
-
 </div>
 
 <div style="max-width: 780px; margin: 0 auto; padding: 0 2rem 3rem;">
