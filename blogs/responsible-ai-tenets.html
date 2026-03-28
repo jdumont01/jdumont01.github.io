@@ -325,7 +325,7 @@
     <p style="font-size: 0.9rem; color: #6b5000; margin: 0; line-height: 1.7;"><strong style="color: #6b5000;">Important Note:</strong> This blog is intended for informational and educational purposes only.  It does not constitute legal advice and should not be relied upon as such.  For any legal concerns related to AI compliance, data privacy, or regulatory obligations, please consult a qualified legal professional.</p>
   </div>
 
-  <p>Knowing that Responsible AI is important is one thing.  As I have learned over the last 2+ years, doing it right is another issue.  Honestly, I had my doubts about how much overhead would be added when we built out our second PoC.  But including Responsible AI at the start made it so much easier to design a safe AI feature rather than bolting on "add-ons" later on an as-needed basis.</p>
+  <p>Understanding that Responsible AI is important is one thing.  As I have learned over the last 2+ years, doing it right is another issue.  Honestly, I had my doubts about how much overhead would be added when we built out our second PoC.  But including Responsible AI at the start made it so much easier to design a safe AI feature rather than bolting on "add-ons" later on an as-needed basis.</p>
 
   <p>There are several groups that describe the tenets of Responsible AI.  Since I started with AWS' definitions,<sup><a href="#ref-1" style="color:var(--clay); text-decoration:none;">1</a></sup> I am going to use these through this blog.  They define Responsible AI to be eight interconnected parts, which act like a checklist validating the behavior of your AI feature.  Your job as a product leader is to make <em>deliberate</em> choices about each one, rather than letting them happen by default.  In the following section, I am going to cover each of the tenets, and describe how 1 or more of them might have been used to address the issues raised in each story described in the previous post.<sup><a href="#ref-3" style="color:var(--clay); text-decoration:none;">3</a></sup></p>
 
@@ -333,11 +333,11 @@
 
   <h2>What is Responsible AI?</h2>
 
-  <p>Responsible AI nudges you to ask a deceptively simple question:  <em>who will use the AI feature?</em>  It is a way to think about AI so that your clients feel safe using it; it is not a single feature or idea.  The focus of Responsible AI is to ensure your AI feature is fair, transparent and explainable.</p>
+  <p>Responsible AI nudges you to ask a deceptively simple question:  <em>who will use the AI feature?</em>  It is a way to think about AI so that your clients feel safe using it; it is not a single feature or idea.  The focus of Responsible AI is to ensure your AI feature is fair, transparent, explainable, and safe.</p>
   <p>If the AI feature:</p>
   <ul>
-    <li>works well for some people but not others then you may have a bias issue</li>
-    <li>works well when you test it in a controlled environment, but does not behave the way you want when a human is interacting with it then you may have security, veracity and safety issues</li>
+    <li>works well for some people but not others, then you may have a bias issue</li>
+    <li>works well when you test it in a controlled environment, but does not behave the way you want when a human is interacting with it, then you may have security, veracity and safety issues</li>
     <li>works well with static prompts during development, but generates results that you cannot understand or that are false, then you might have robustness and explainability issues</li>
   </ul>
 
@@ -350,12 +350,6 @@
   <h2>The 8 Tenets of Responsible AI</h2>
 
   <p>Let's review the eight tenets of Responsible AI defined by AWS. Think of them as a checklist you run against every AI feature you either build or buy throughout its lifetime.</p>
-
-  <div style="margin:2rem 0; text-align:center;">
-    <img src="../images/blog/Responsible_AI_Lifecycle.png" alt="Responsible AI Applied Across the AI Feature Lifecycle" style="max-width:100%; border-radius:12px; border:0.5px solid var(--border);" />
-    <p style="font-size:0.8rem; color:var(--ink-light); margin-top:0.75rem;">Figure 1: All of the tenets of Responsible AI are constantly applied to the entire lifecycle of the AI. Monitoring the behavior of the AI and measuring user feedback is key to ensuring the AI is meeting the user's needs.  Otherwise, updates to the design and/or the code will be needed.</p>
-  </div>
-
 
   <div class="tenet-card">
     <div class="tenet-title">Fairness</div>
@@ -395,7 +389,7 @@
       <li>disallowed topics</li>
       <li>forbidden words or phrases</li>
     </ul>
-    <p class="tenet-desc">The Safety tenet requires continuous monitoring for the lifetime of the AI feature even if the feature is safe at launch.  Over time model updates, new user behavior patterns, or a deliberate adversarial prompt, may affect the behavior of the AI feature.</p>
+    <p class="tenet-desc">The Safety tenet requires continuous monitoring throughout the lifecycle of the AI feature even if the feature is safe at launch.  Over time model updates, new user behavior patterns, or a deliberate adversarial prompt, may affect the behavior of the AI feature.</p>
   </div>
 
   <div class="tenet-card">
@@ -447,6 +441,23 @@
 
   <div class="post-divider"></div>
 
+  <h2>Example:  Why Responsible AI Is Needed</h2>
+
+  <p>Consider an AI-powered customer support assistant that answers product questions for automobile parts.  The users are either auto mechanics or automobile owners. If the assistant generates incorrect or misleading guidance, the user could make decisions that result in the wrong part being ordered or the wrong diagnosis to an engine noise. Without guardrails, monitoring, and validation, the AI may provide confident but incorrect responses, exposing both the user and the organization to risk and damage the brand.</p>
+
+  <p>This is where applying the tenets of Responsible AI becomes critical. If the wrong part were ordered based on the AI support assistant, then there would be delays to fixing the car. Similarly, if the wrong diagnosis is made, then the customer may spend more money on a problem that never gets fixed.</p>
+
+  <p>Monitoring user feedback for response accuracy, and then following the chain of thought via an observability tool, will help determine a path forward to re-establishing the correct behavior for the AI. That is, determine if there is a design issue, a coding problem, an LLM or Knowledge Base (KB) configuration issue, etc. Once identified, then the product team can update the AI.</p>
+
+  <div style="margin:2rem 0; text-align:center;">
+    <img src="../images/blog/Responsible_AI_Lifecycle.png" alt="Responsible AI Applied Across the AI Feature Lifecycle" style="max-width:100%; border-radius:12px; border:0.5px solid var(--border);" />
+    <p style="font-size:0.8rem; color:var(--ink-light); margin-top:0.75rem;">Figure 1: All of the tenets of Responsible AI are constantly applied for the entire lifecycle of the feature. Monitoring AI behavior and user feedback is key to ensuring the system continues to meet user needs.</p>
+  </div>
+
+  <p>A more detailed use case will be covered in the next post.</p>
+
+  <div class="post-divider"></div>
+
   <h2>A Framework, Not a Finish Line</h2>
 
   <p>When I read the tenets of Responsible AI framework a while ago, the proverbial lightbulb turned on.  First I found the Responsible AI framework to be practical; it just made sense.  It identified issues that would keep a Product Owner up at night like hidden biases, malicious prompting, etc.  Second, applying the tenets on Day 0 directed the design to mandate features like Guardrails, and selecting and configuring the right LLM.  Third, the tenets become product requirements that can be tested, and audited via KPIs.</p>
@@ -457,11 +468,22 @@
     <p>The organizations that get this right are not the ones with the biggest AI budgets.  They are the ones that treat Responsible AI as a product discipline — with owners, metrics, milestones, and accountability — just like any other feature.</p>
   </blockquote>
 
-  <p>As I conclude this blog, I want to share that I have designed, developed, and deployed AI features as both PoCs (Proof-of-Concepts) and MVPs (Minimal Viable Products).  One of the most important lessons I learned is that the time to think about Responsible AI is before you write a single line of code.  I believe that each of the failures described in the previous post could have been prevented by simply asking the right questions on Day 0.</p>
+  <p>As I conclude, I want to share that I have designed, developed, and deployed AI features as both PoCs (Proof-of-Concepts) and MVPs (Minimal Viable Products).  One of the most important lessons I learned is that the time to think about Responsible AI is before you write a single line of code.  I believe that each of the failures described in the previous post could have been prevented by simply asking the right questions on Day 0.</p>
 
-  <p>So, start with the eight tenets and ask which apply to your use case.  Then, assign an owner to each and build them into your definition of done.  After your AI feature is deployed, revisit the tenets every time there is a model change, the behavior needs to be redefined, or the use case expands.  That is what it means to build AI responsibly.</p>
+  <p>Putting my Product Owner hat on for a moment, here is an action list that might help:</p>
+  <ul>
+    <li>identify the relevant tenets for the use case</li>
+    <li>assign an owner to each</li>
+    <li>convert them into acceptance criteria</li>
+    <li>monitor them after launch</li>
+  </ul>
 
   <div class="post-divider"></div>
+
+  <div class="summary-box">
+    <p><strong>Up Next:</strong> In this article we discussed what each tenet of Responsible AI is.  The next post will explore tools and services to put them into practice.</p>
+  </div>
+
 </div>
 
 <div style="max-width: 780px; margin: 0 auto; padding: 0 2rem 3rem;">
