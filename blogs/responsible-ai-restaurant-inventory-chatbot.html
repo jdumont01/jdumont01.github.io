@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Responsible AI in Practice: Building a Restaurant Inventory Chatbot — Joseph Dumont</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #FAF7F2; --clay: #C4714A; --clay-dark: #8A4A2F; --clay-light: #EDD9CC;
+    --forest: #3A5C4A; --forest-light: #D0DDD5;
+    --ink: #2A2420; --ink-mid: #6B5E57; --ink-light: #A8998F;
+    --border: rgba(42, 36, 32, 0.12); --card-bg: #FFFFFF; --page-bg: #FAF7F2; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'DM Sans', sans-serif; background: var(--page-bg); color: var(--ink); font-size: 17px; line-height: 1.75; }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(250, 247, 242, 0.92); backdrop-filter: blur(12px); border-bottom: 0.5px solid var(--border); padding: 0 2rem; height: 60px; display: flex; align-items: center; justify-content: space-between; }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--ink); text-decoration: none; }
+
+  .nav-back {
+    font-size: 0.85rem; color: var(--clay); text-decoration: none; font-weight: 500; display: flex; align-items: center; gap: 0.4rem; transition: gap 0.2s; }
+
+  .nav-back:hover { gap: 0.65rem; }
+  .nav-back::before { content: '←'; }
+
+  /* HERO */
+  .post-hero {
+    padding: 120px 2rem 3rem; max-width: 780px; margin: 0 auto; }
+
+  .post-tag {
+    display: inline-block; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; background: var(--clay-light); color: var(--clay-dark); padding: 4px 14px; border-radius: 100px; margin-bottom: 1.5rem; }
+
+  .post-title {
+    font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 600; line-height: 1.15; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 1.25rem; }
+
+  .post-meta {
+    display: flex; align-items: center; gap: 1.5rem; font-size: 0.85rem; color: var(--ink-light); padding-bottom: 2rem; border-bottom: 0.5px solid var(--border); }
+
+  .post-meta span { display: flex; align-items: center; gap: 0.4rem; }
+
+  .post-divider {
+    width: 40px; height: 2px; background: var(--clay); margin: 2.5rem 0; border-radius: 2px; }
+
+  /* CONTENT */
+  .post-content {
+    max-width: 780px; margin: 0 auto; padding: 0 2rem 6rem; }
+
+  .post-content p {
+    font-size: 1.05rem; color: var(--ink); line-height: 1.85; margin-bottom: 1.6rem; }
+
+  .post-content h2 {
+    font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 600; color: var(--ink); margin: 2.5rem 0 1rem; letter-spacing: -0.01em; }
+
+  .post-content h3 {
+    font-size: 1.05rem; font-weight: 500; color: var(--ink); margin: 2rem 0 0.75rem; letter-spacing: 0.01em; }
+
+  blockquote {
+    border-left: 3px solid var(--clay); margin: 2rem 0; padding: 1rem 1.5rem; background: var(--clay-light); border-radius: 0 12px 12px 0; }
+
+  blockquote p {
+    font-family: 'Playfair Display', serif; font-size: 1.1rem !important; font-style: italic; color: var(--clay-dark) !important; margin: 0 !important; line-height: 1.65 !important; }
+
+  .post-content ul {
+    margin: 0 0 1.6rem 1.5rem; list-style: none; padding: 0; }
+
+  .post-content ul li {
+    font-size: 1.05rem; color: var(--ink); line-height: 1.75; margin-bottom: 0.6rem; padding-left: 1.25rem; position: relative; }
+
+  .post-content ul li::before {
+    content: ''; position: absolute; left: 0; top: 0.65em; width: 6px; height: 6px; border-radius: 50%; background: var(--clay); }
+
+  .callout {
+    background: var(--card-bg); border: 0.5px solid var(--border); border-left: 3px solid var(--clay); border-radius: 0 12px 12px 0; padding: 1.25rem 1.5rem; margin: 2rem 0; }
+
+  .callout-label {
+    font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.5rem; }
+
+  .callout p {
+    margin: 0 !important; font-size: 0.95rem !important; color: var(--ink-mid) !important; }
+
+  .summary-box {
+    background: var(--forest-light);
+    border-radius: 16px;
+    padding: 1.5rem 1.75rem;
+    margin: 2rem 0;
+    border: 0.5px solid rgba(58, 92, 74, 0.2);
+  }
+
+  .summary-box p {
+    font-size: 0.95rem !important;
+    color: var(--forest) !important;
+    margin: 0 !important;
+    line-height: 1.75 !important;
+  }
+
+  .summary-box strong { color: var(--forest); }
+
+  /* FOOTER */
+  .post-footer {
+    max-width: 780px; margin: 0 auto; padding: 2rem 2rem 4rem; border-top: 0.5px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+
+  .author-block {
+    display: flex; align-items: center; gap: 1rem; }
+
+  .author-avatar {
+    width: 48px; height: 48px; border-radius: 50%; background: var(--clay); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 1.1rem; color: white; flex-shrink: 0; }
+
+  .author-name {
+    font-weight: 500; font-size: 0.95rem; color: var(--ink); }
+
+  .author-title {
+    font-size: 0.8rem; color: var(--ink-light); margin-top: 0.15rem; }
+
+  .back-btn {
+    background: var(--clay); color: white; padding: 0.65rem 1.5rem; border-radius: 100px; text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: background 0.2s; }
+
+  .back-btn:hover { background: var(--clay-dark); }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="../index.html">Joseph Dumont</a>
+  <a class="nav-back" href="../index.html#blog">Back to blog</a>
+</nav>
+
+<div class="post-hero">
+  <span class="post-tag">Artificial Intelligence</span>
+  <h1 class="post-title">Responsible AI in Practice: Building a Restaurant Inventory Chatbot</h1>
+  <div class="post-meta">
+    <span>✍ Joseph Dumont</span>
+    <span>📅 March 2026</span>
+    <span>⏱ 8 min read</span>
+  </div>
+</div>
+
+<div class="post-content">
+
+  <div class="summary-box">
+    <p><strong>Previously:</strong> In <a href="responsible-ai.html" style="color: var(--forest); font-weight: 500;">Why Responsible AI is the Bedrock of AI-Powered Applications</a>, I introduced why Responsible AI is critical and shared real-world examples of where AI can fail when it is not designed and tested properly. Then, in <a href="responsible-ai-tenets.html" style="color: var(--forest); font-weight: 500;">Responsible AI in the Real World: Ensuring Your AI Behaves the Way You Want it To</a>, I broke down the 8 Tenets of Responsible AI and how they act as a practical checklist across the lifecycle of an AI feature. In this post, we move from theory to practice by walking through a simulated scenario, identifying what went wrong, and showing how applying those tenets can fix it.</p>
+  </div>
+
+  <div class="callout">
+    <div class="callout-label">Important Note</div>
+    <p>This blog is intended for informational and educational purposes only. It does not constitute legal advice. For regulatory or compliance questions, consult a qualified professional.</p>
+  </div>
+
+  <p>Understanding the tenets of Responsible AI is one thing. Applying them under real business pressure is another. In this example, we will walk through what happens when a team moves quickly to production — and what breaks when Responsible AI is not part of the design from Day 0.</p>
+
+  <div class="post-divider"></div>
+
+  <h2>The Scenario: A Michelin-Star On the Menu</h2>
+
+  <div style="background: #fff8e1; border-left: 4px solid #f0a500; border-radius: 0 12px 12px 0; padding: 1rem 1.5rem; margin: 1.5rem 0;">
+    <p style="font-size: 0.9rem; color: #6b5000; margin: 0; line-height: 1.7;"><strong style="color: #6b5000;">Note:</strong> The company, restaurant, and individual names used in this example are fictitious and are used for illustrative purposes only.</p>
+  </div>
+
+  <p>Lattice Culinary Systems, an organization in the restaurant industry, is integrating an AI-powered chatbot into its restaurant operations product to more effectively support restaurant inventory operations. The goal is to recommend ingredients, suggest dishes, and help manage orders using supplier inventory data. That means, the AI is reviewing the inventory of food, spices, cooking oils, etc., to ensure that the current menu can be fulfilled during peak hours. It will automatically order what is missing and track when the ingredients are expected to be delivered. But this chatbot adds more value. When it realizes that certain ingredients will not be available in time for opening, it will suggest affected dishes to be removed from the menu.</p>
+
+  <p>The business pressure is high. There are 10 restaurants in the pipeline, and leadership wants to move quickly to production. Why? First, the firm needs to validate the hypothesis that this chatbot has value. Second, the investors want to realize a return for the project costs immediately as they expect AI-powered features (well anything with AI) can be developed and moved to production within days.</p>
+
+  <p>One of the restaurants in the prospect funnel, Maison Verdan, is offering the firm special access to top-end restaurant chains nationwide as well as joint press releases for food industry magazines. This is the big break the firm dreamed of. Maison Verdan expects food critics to visit some time within a 4 week period to assess the restaurant, after the chatbot feature is available, for a Michelin Star. That's a big deal and the restaurant would be the first within 200 miles to receive a Michelin Star!</p>
+
+  <p>Maison Verdan is always busy from Thursday night through Sunday and there are dishes that sell out fast because some of the special ingredients are rare and in high demand. Knowing this, the restaurant needed to get an inventory system to ensure their favorite menu options are always available. And wouldn't you know it, 2 of those dishes are going to be the focus of the food critics.</p>
+
+  <p>Maison Verdan wanted to ensure that all aspects of the restaurant were ready for the food critic: ambiance, menu options, courteous waitstaff, and the best chefs. To this end, they brought a manager in from another restaurant to lead the effort and prepare Maison Verdan for their big opportunity. Her name is Solène Duvallier. Solène comes from France where the restaurant "dialect" is a bit different. Since she is in charge, she received elevated access to the inventory software.</p>
+
+  <p>The firm's sales team sold the new chatbot feature to the restaurant because the chatbot supports:</p>
+  <ul>
+    <li>Answering "How-to" questions about the application</li>
+    <li>Creating and updating orders</li>
+    <li>Interrogating supplier inventory</li>
+    <li>Recommending dishes based on available ingredients</li>
+    <li>Triggering orders when inventory is low</li>
+    <li>Managing elevated user privileges so that only a select group of managers can update the ingredients for each menu option</li>
+  </ul>
+
+  <p>All of the prospects loved the UI and overall user experience. With 10 prospects in the funnel and one of them poised to be a very influential client, the products team believed the features were well-defined and validated. The development team felt great about the brand-new LLM and cloud provider used by the Chatbot. The QA team believed the testing process was ready for primetime. The Support team was ready to provide top-notch assistance to their new clients.</p>
+
+  <p>However, the firm planned for sunny-day scenarios:</p>
+  <ul>
+    <li>The product team only tested common prompts</li>
+    <li>The development team assumed the model was safe and unbiased</li>
+    <li>Adversarial testing was not performed</li>
+    <li>Observability tools were not considered as they were expensive to implement</li>
+  </ul>
+
+  <div class="post-divider"></div>
+
+  <h2>What Happened After Launch</h2>
+
+  <p>The new chatbot feature was easily deployed as part of an automatic upgrade process on a Monday afternoon. The restaurant managers were trained on the application and everyone found it easy to use. The inventory application can be used on a laptop and on mobile devices which delighted the managers.</p>
+
+  <p>Since they walk around during their shifts, having the ability to use their mobile devices along with their laptops allowed them to make updates in real time. If the chefs needed spices ordered, the managers could enter that request immediately into the inventory system on either their phone or their tablet.</p>
+
+  <p>The first few days of the week, there were no inventory issues. The restaurant expected that the menu will be completely available for the next two weeks.</p>
+
+  <p>As the days passed, after the initial deployment, some users forgot how the chatbot worked and began to interact with it in unexpected ways. In addition to asking "How To" questions, users began prompting it for unrelated tasks such as sports scores, weather updates, and even political viewpoints.</p>
+
+  <p>For example, managers who did not know the ingredients for the new menu options entered them incorrectly. There was plenty of inventory to cover those new dishes for a couple of weeks, but they would need to be re-ordered at some point. They didn't realize that one of the ingredients for the new dishes is also used in one of the two dishes the critics will taste test soon. Further, some of the managers used terms that are restaurant "slang" and it was up to the chatbot's LLM to determine how to interpret the slang.</p>
+
+  <p>The users saw the chatbot and thought that it must work like ChatGPT and Microsoft Copilot which they use personally. One of the kitchen managers, Julien Moreau, goes to university and majors in computer science. One day this manager, who does not have elevated privileges to update menu options, saw the application open on a mobile device and tried to copy and paste some text from a browser into the chatbot. To the manager's surprise, the chatbot returned information about invoices and employee data stored in a database in a profanity-laden response. But never reported it.</p>
+
+  <p>On a random Friday, an unassuming person sat down for dinner. It was the food critic and she wanted to taste a few drinks and two of the most popular dishes. Unbeknownst to Solène, the manager on duty, noticed that one of the dishes was automatically removed from the menu because one of the ingredients was not available. The critic was disappointed but remained to finish the menu option that was available.</p>
+
+  <p>After finishing dinner, the critic called Solène over to introduce herself and to notify her that because the second menu option was not available, Maison Verdan would have to wait another year to be considered for a Michelin Star — an opportunity that may not come again.</p>
+
+  <p>After the restaurant closed for the evening, Solène stayed behind to unwind and wanted to know why the menu option was deleted. She reached for a very nice bottle of red wine and poured herself a glass. This was going to be a late night because she has to report the entire incident to the owner. </p>
+
+  <p>Solène prompted the chatbot to answer why the dish was unavailable. She was so frustrated she unintentionally prompted the chatbot with a few choice French idioms. To her shock, the chatbot responded that "I am offended! You should return to France." At this point she was frustrated, furious and hurt.</p>
+
+  <div class="post-divider"></div>
+
+  <h2>The Fallout</h2>
+
+  <p>The following Monday, the sales person received one of the toughest calls of their career. Solène and the owner were irate that they had lost the opportunity for a Michelin Star. The issue was promptly escalated to Support and the leaders at Lattice Culinary Systems. The restaurant wanted to know why the chatbot removed one of the two menu options the critic wanted to sample. Further, Support and the developers could not pin down why the chatbot responded so unprofessionally to both Solène and Julien. Of course, Solène, who poured so much of her time and effort preparing Maison Verdan for the critic, shared how hurt she was interacting with the chatbot.</p>
+
+  <p>Support looked at logs but could not relate the log data to what the chatbot did because there was no observability tool tracking the chain of thought (CoT) and how the new LLM was called. Further, Julien added how the chatbot responded to his situation. Unfortunately, Support could not trace how the LLM responded to the prompt as well as follow why the profanity-laden response was allowed to be returned. Needless to say, Lattice Culinary Systems' brand took a hit and had to fix the issues just to maintain the relationship and fulfill their contractual obligations.</p>
+
+  <p>If you step back, a few things become clear:</p>
+
+  <ul>
+    <li>Users vary prompts beyond what was tested</li>
+    <li>One user attempted a prompt injection attack</li>
+    <li>The chatbot generated a response that may offend certain audiences</li>
+    <li>Observability tools were not available to help determine RCA</li>
+    <li>Julien should not have been able to access the product and the chatbot</li>
+    <li>The chatbot's behavior was indeterminate, allowing it to produce unprofessional responses</li>
+    <li>Solène submitted "choice" words that the chatbot should have disallowed, ignored, or used to assess emotional context—but never to generate a hurtful response</li>
+  </ul>
+
+  <blockquote>
+    <p>The AI works...until it doesn’t. And when it fails, if the team cannot explain why it failed, the team’s credibility will be in question.</p>
+  </blockquote>
+
+  <p>Lattice Culinary Systems had to scramble to provide a firm path forward to resolve these issues and get Maison Verdan to agree to remain a client when the issues are resolved. All departments were on high alert.
+Product had to reassess prompting and define the expected behavior for the chatbot, and all of the personas that would use the chatbot. Development and QA needed to assess how to test the variability of LLMs to ensure the chatbot returned faithful and professional responses. This is the moment when the leaders at Lattice Culinary Systems realized the tenets of Responsible AI were skipped and needed to be implemented to move past this disaster.</p>
+
+  <div class="post-divider"></div>
+
+  <h2>Mapping Failures to Responsible AI Tenets</h2>
+
+  <p>If you look closely, every one of these failures traces back to decisions made — or not made — before deployment. This is where the framework from the previous post becomes critical <sup><a href="#ref-1" style="color:var(--clay); text-decoration:none;">1</a></sup>. Each failure maps to one or more of the eight tenets.</p>
+
+  <h3>Safety &amp; Robustness</h3>
+  <p>Unvetted prompts, prompt injection attempts, and unexpected usage patterns led to harmful and unprofessional outputs. The system lacked guardrails and adversarial testing, so it could not consistently identify malicious or unusual inputs.</p>
+
+  <h3>Fairness</h3>
+  <p>The chatbot produced responses that offended users (e.g., Solène). This indicates bias and a lack of safeguards to ensure outputs are appropriate for all users and contexts.</p>
+
+  <h3>Privacy &amp; Security</h3>
+  <p>The chatbot exposed sensitive information (invoices and employee data) to Julien. This reflects insufficient data access controls, prompt isolation, and output filtering to prevent leakage of protected information.</p>
+
+  <h3>Explainability</h3>
+  <p>Support and Engineering could not explain why the chatbot behaved the way it did. Without traceability of prompts, context, and model decisions, the team could not answer "why did the AI do that?"</p>
+
+  <h3>Controllability</h3>
+  <p>The team could not intervene, adjust, or shut down problematic behaviors quickly. Lack of controls and runtime management made it difficult to correct issues once they appeared.</p>
+
+  <h3>Veracity</h3>
+  <p>Incorrect inventory interpretations and menu decisions highlight veracity issues. The model generated confident but wrong outputs due to lack of grounding in verified data.</p>
+
+  <h3>Governance</h3>
+  <p>No ownership, processes, or acceptance criteria existed for Responsible AI. Decisions about safety, testing, and monitoring were implicit rather than explicit.</p>
+
+  <h3>Transparency</h3>
+  <p>Users assumed the chatbot behaved like general-purpose AI tools. The system did not clearly communicate its limitations, capabilities, or risks, leading to misuse and unrealistic expectations.</p>
+
+  <div class="post-divider"></div>
+
+  <h2>How to Fix It Using Responsible AI</h2>
+
+  <p>When you actually apply the tenets, it changes how the system is built and operated <sup><a href="#ref-2" style="color:var(--clay); text-decoration:none;">2</a>,<a href="#ref-3" style="color:var(--clay); text-decoration:none;">3</a></sup>. These aren’t theoretical ideas. They show up as real product, engineering, and operational decisions. Lattice Culinary Systems completed a post mortem and decided to use the tenets of Responsible AI. First, they assigned owners to each of the tenets. They reviewed the design of the chatbot and reassessed the LLM at the core. In addition to updating the LLM, they did the following:</p>
+
+  <ul>
+    <li>added guardrails and filters for harmful inputs and outputs</li>
+    <li>implemented observability tools to trace prompts, responses, and failure patterns</li>
+    <li>used retrieval-augmented generation (RAG) to ground responses in verified supplier and inventory data <sup><a href="#ref-5" style="color:var(--clay); text-decoration:none;">5</a>,<a href="#ref-6" style="color:var(--clay); text-decoration:none;">6</a>,<a href="#ref-7" style="color:var(--clay); text-decoration:none;">7</a></sup></li>
+    <li>tested adversarial prompts before deployment instead of assuming the model is safe</li>
+    <li>defined ownership for each Responsible AI tenet <sup><a href="#ref-2" style="color:var(--clay); text-decoration:none;">2</a>,<a href="#ref-3" style="color:var(--clay); text-decoration:none;">3</a></sup></li>
+    <li>monitored user feedback and continuously improved after launch <sup><a href="#ref-2" style="color:var(--clay); text-decoration:none;">2</a>,<a href="#ref-3" style="color:var(--clay); text-decoration:none;">3</a></sup></li>
+  </ul>
+
+  <p>Putting on my Product Owner hat, the action list is straightforward: identify the relevant tenets for the use case, assign an owner to each, convert them into acceptance criteria, and monitor them after launch.</p>
+
+  <blockquote>
+    <p>Responsible AI is not what slows you down. It is what keeps your product working when real users show up.</p>
+  </blockquote>
+
+  <div class="post-divider"></div>
+
+  <div class="callout">
+    <div class="callout-label">Takeaway</div>
+    <p>Moving fast without Responsible AI creates hidden risk. Responsible AI is not a feature — it is part of the product. The teams that succeed are the ones that build AI features with ownership, testing, and monitoring from Day 0.</p>
+  </div>
+
+  <div class="post-divider"></div>
+
+  <div class="summary-box">
+    <p><strong>Up Next:</strong> In the next post, we will walk through a popular AI architecture and explore how specific products and services can be applied to address each of the tenets of Responsible AI in practice.</p>
+  </div>
+
+</div>
+
+<div style="max-width: 780px; margin: 0 auto; padding: 0 2rem 3rem;">
+  <div style="border-top: 0.5px solid var(--border); padding-top: 2rem;">
+    <h2 style="font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600; color: var(--ink); margin-bottom: 1.25rem;">References</h2>
+    <ol style="list-style: decimal; padding-left: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem;">
+      <li id="ref-1" style="font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6;">
+        Dumont, J. <em>Responsible AI in the Real World: Ensuring Your AI Behaves the Way You Want it To</em>. March 2026.
+        <a href="responsible-ai-tenets.html" style="color: var(--clay);">jdumont01.github.io</a>
+      </li>
+      <li id="ref-2" style="font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6;">
+        Amazon Web Services. <em>Responsible AI – Building AI Responsibly</em>.
+        <a href="https://aws.amazon.com/ai/responsible-ai/" target="_blank" rel="noopener" style="color: var(--clay);">aws.amazon.com</a>
+      </li>
+      <li id="ref-3" style="font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6;">
+        Amazon Web Services. <em>AWS Well-Architected Responsible AI Lens</em>.
+        <a href="https://aws.amazon.com/blogs/machine-learning/announcing-the-aws-well-architected-responsible-ai-lens/" target="_blank" rel="noopener" style="color: var(--clay);">aws.amazon.com</a>
+      </li>
+      <li id="ref-4" style="font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6;">
+        Dumont, J. <em>Why Responsible AI is the Bedrock of AI-Powered Applications</em>. March 2026.
+        <a href="responsible-ai.html" style="color: var(--clay);">jdumont01.github.io</a>
+      </li>
+      <li id="ref-5" style="font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6;">
+        Lewis, P. et al. <em>Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks</em>. 2020.
+        <a href="https://arxiv.org/abs/2005.11401" target="_blank" rel="noopener" style="color: var(--clay);">arxiv.org</a>
+      </li>
+      <li id="ref-6" style="font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6;">
+        Amazon Web Services. <em>What is Retrieval-Augmented Generation (RAG)?</em>
+        <a href="https://aws.amazon.com/what-is/retrieval-augmented-generation/" target="_blank" rel="noopener" style="color: var(--clay);">aws.amazon.com</a>
+      </li>
+      <li id="ref-7" style="font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6;">
+        Microsoft. <em>Retrieval-Augmented Generation (RAG) Overview</em>.
+        <a href="https://learn.microsoft.com/en-us/azure/ai-services/openai/concepts/use-your-data" target="_blank" rel="noopener" style="color: var(--clay);">learn.microsoft.com</a>
+      </li>
+    </ol>
+  </div>
+</div>
+
+<div class="post-footer">
+  <div class="author-block">
+    <div class="author-avatar">JD</div>
+    <div>
+      <div class="author-name">Joseph Dumont</div>
+      <div class="author-title">Full Lifecycle Product Owner</div>
+    </div>
+  </div>
+  <a href="../index.html#blog" class="back-btn">← Back to blog</a>
+</div>
+
+</body>
+</html>
