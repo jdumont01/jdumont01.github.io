@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Responsible AI in Practice: Orchestrated Restaurant Inventory System — Joseph Dumont</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #FAF7F2; --clay: #C4714A; --clay-dark: #8A4A2F; --clay-light: #EDD9CC; --ink: #2A2420; --ink-mid: #6B5E57; --ink-light: #A8998F; --border: rgba(42, 36, 32, 0.12); --card-bg: #FFFFFF; --page-bg: #FAF7F2; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif; background: var(--page-bg); color: var(--ink); font-size: 17px; line-height: 1.75; }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100; background: rgba(250, 247, 242, 0.92); backdrop-filter: blur(12px); border-bottom: 0.5px solid var(--border); padding: 0 2rem; height: 60px; display: flex; align-items: center; justify-content: space-between; }
+
+    .nav-logo {
+      font-family: 'Playfair Display', serif; font-size: 1.1rem; color: var(--ink); text-decoration: none; }
+
+    .nav-back {
+      font-size: 0.85rem; color: var(--clay); text-decoration: none; font-weight: 500; display: flex; align-items: center; gap: 0.4rem; transition: gap 0.2s; }
+
+    .nav-back:hover { gap: 0.65rem; }
+    .nav-back::before { content: '←'; }
+
+    .post-hero {
+      padding: 120px 2rem 3rem; max-width: 780px; margin: 0 auto; }
+
+    .post-tag {
+      display: inline-block; font-size: 0.72rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; background: var(--clay-light); color: var(--clay-dark); padding: 4px 14px; border-radius: 100px; margin-bottom: 1.5rem; }
+
+    .post-title {
+      font-family: 'Playfair Display', serif; font-size: clamp(2rem, 4.5vw, 3rem); font-weight: 600; line-height: 1.15; letter-spacing: -0.02em; color: var(--ink); margin-bottom: 1.25rem; }
+
+    .post-meta {
+      display: flex; align-items: center; gap: 1.5rem; font-size: 0.85rem; color: var(--ink-light); padding-bottom: 2rem; border-bottom: 0.5px solid var(--border); }
+
+    .post-meta span { display: flex; align-items: center; gap: 0.4rem; }
+
+    .post-divider {
+      width: 40px; height: 2px; background: var(--clay); margin: 2.5rem 0; border-radius: 2px; }
+
+    .post-content {
+      max-width: 780px; margin: 0 auto; padding: 0 2rem 6rem; }
+
+    .post-content p {
+      font-size: 1.05rem; color: var(--ink); line-height: 1.85; margin-bottom: 1.6rem; }
+
+    .post-content h2 {
+      font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 600; color: var(--ink); margin: 2.5rem 0 1rem; letter-spacing: -0.01em; }
+
+    .post-content h3 {
+      font-size: 1.05rem; font-weight: 500; color: var(--ink); margin: 2rem 0 0.75rem; letter-spacing: 0.01em; }
+
+    blockquote {
+      border-left: 3px solid var(--clay); margin: 2rem 0; padding: 1rem 1.5rem; background: var(--clay-light); border-radius: 0 12px 12px 0; }
+
+    blockquote p {
+      font-family: 'Playfair Display', serif; font-size: 1.1rem !important; font-style: italic; color: var(--clay-dark) !important; margin: 0 !important; line-height: 1.65 !important; }
+
+    .post-content ul {
+      margin: 0 0 1.6rem 1.5rem; list-style: none; padding: 0; }
+
+    .post-content ul li {
+      font-size: 1.05rem; color: var(--ink); line-height: 1.75; margin-bottom: 0.6rem; padding-left: 1.25rem; position: relative; }
+
+    .post-content ul li::before {
+      content: ''; position: absolute; left: 0; top: 0.65em; width: 6px; height: 6px; border-radius: 50%; background: var(--clay); }
+
+    .callout {
+      background: var(--card-bg); border: 0.5px solid var(--border); border-left: 3px solid var(--clay); border-radius: 0 12px 12px 0; padding: 1.25rem 1.5rem; margin: 2rem 0; }
+
+    .callout-label {
+      font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.5rem; }
+
+    .callout p {
+      margin: 0 !important; font-size: 0.95rem !important; color: var(--ink-mid) !important; }
+
+    .summary-box {
+      background: #f0f6f2; border-radius: 16px; padding: 1.5rem 1.75rem; margin: 2rem 0; border: 0.5px solid rgba(58, 92, 74, 0.2); }
+
+    .summary-box p {
+      font-size: 0.95rem !important; color: #3A5C4A !important; margin: 0 !important; line-height: 1.75 !important; }
+
+    .summary-box strong { color: #3A5C4A; }
+
+    .diagram-box {
+      background: var(--card-bg); border: 0.5px solid var(--border); border-radius: 16px; padding: 0.75rem; margin: 1.5rem 0 2rem; overflow-x: auto; }
+
+    table {
+      width: 100%; border-collapse: separate; border-spacing: 0; font-size: 0.97rem; background: var(--card-bg); }
+
+    th {
+      text-align: left; padding: 0.9rem 1rem; font-size: 0.78rem; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-mid); background: rgba(196, 113, 74, 0.08); border-bottom: 1px solid var(--border); }
+
+    td {
+      padding: 0.95rem 1rem; text-align: left; vertical-align: top; color: var(--ink); border-bottom: 1px solid var(--border); line-height: 1.65; }
+
+    tbody tr:nth-child(even) td { background: rgba(42, 36, 32, 0.025); }
+    tbody tr:hover td { background: rgba(196, 113, 74, 0.06); }
+    table tr:last-child td { border-bottom: none; }
+    table th:first-child { border-top-left-radius: 12px; }
+    table th:last-child { border-top-right-radius: 12px; }
+
+    .references-wrap {
+      max-width: 780px; margin: 0 auto; padding: 0 2rem 3rem; }
+
+    .references-inner {
+      border-top: 0.5px solid var(--border); padding-top: 2rem; }
+
+    .references-inner h2 {
+      font-family: 'Playfair Display', serif; font-size: 1.2rem; font-weight: 600; color: var(--ink); margin-bottom: 1.25rem; }
+
+    .references-inner ol {
+      list-style: decimal; padding-left: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; }
+
+    .references-inner li {
+      font-size: 0.85rem; color: var(--ink-mid); line-height: 1.6; }
+
+    .references-inner a { color: var(--clay); }
+
+    .post-footer {
+      max-width: 780px; margin: 0 auto; padding: 2rem 2rem 4rem; border-top: 0.5px solid var(--border); display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+
+    .author-block { display: flex; align-items: center; gap: 1rem; }
+
+    .author-avatar {
+      width: 48px; height: 48px; border-radius: 50%; background: var(--clay); display: flex; align-items: center; justify-content: center; font-family: 'Playfair Display', serif; font-size: 1.1rem; color: white; flex-shrink: 0; }
+
+    .author-name { font-weight: 500; font-size: 0.95rem; color: var(--ink); }
+    .author-title { font-size: 0.8rem; color: var(--ink-light); margin-top: 0.15rem; }
+
+    .back-btn {
+      background: var(--clay); color: white; padding: 0.65rem 1.5rem; border-radius: 100px; text-decoration: none; font-size: 0.875rem; font-weight: 500; transition: background 0.2s; }
+
+    .back-btn:hover { background: var(--clay-dark); }
+  </style>
+</head>
+<body>
+
+  <nav>
+    <a class="nav-logo" href="../index.html">Joseph Dumont</a>
+    <a class="nav-back" href="../index.html#blog">Back to blog</a>
+  </nav>
+
+  <div class="post-hero">
+    <span class="post-tag">Artificial Intelligence</span>
+    <h1 class="post-title">Responsible AI in Practice: Orchestrated Restaurant Inventory System</h1>
+    <div class="post-meta">
+      <span>✍ Joseph Dumont</span>
+      <span>📅 March 2026</span>
+      <span>⏱ 9 min read</span>
+    </div>
+  </div>
+
+  <div class="post-content">
+
+    <div class="summary-box">
+      <p><strong>Previously:</strong> In the first three posts, I introduced why Responsible AI matters<sup><a href="#ref-9" style="color: var(--clay); text-decoration:none;">9</a></sup>, described the 8 Tenets of Responsible AI<sup><a href="#ref-10" style="color: var(--clay); text-decoration:none;">10</a></sup>, and walked through a simulated restaurant scenario showing what happens when those tenets are skipped<sup><a href="#ref-11" style="color: var(--clay); text-decoration:none;">11</a></sup>. In this post, the discussion shifts from theory and failure scenarios into implementation.</p>
+    </div>
+
+    <div class="callout">
+      <div class="callout-label">Note</div>
+      <p>This product example is fictitious and is intended for educational purposes only.</p>
+    </div>
+
+    <div class="callout">
+      <div class="callout-label">Focus</div>
+      <p>This article uses a popular orchestration-based AI design pattern for a restaurant inventory chatbot that supports operational tasks, tool use, human feedback, and continuous monitoring. The goal is to show how to design an AI-powered feature that not only delivers value, but does so in a controlled, observable, and responsible way.</p>
+    </div>
+
+    <div class="post-divider"></div>
+
+    <h2>From Ideation to Production</h2>
+
+    <p>In practice, product definition, development, and Responsible AI considerations evolve together. This is not a linear process. It is iterative, and often messy, especially when working with AI systems where behavior can change based on inputs, data, and model updates.</p>
+
+    <h3>Products</h3>
+    <div class="diagram-box">
+      <table>
+        <thead><tr><th>Phase</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Problem Definition</strong></td><td>Clearly define the user problem, business value, and success metrics</td></tr>
+          <tr><td><strong>Use Case Design</strong></td><td>Identify user workflows, intents, and where AI adds value</td></tr>
+          <tr><td><strong>Risk Identification</strong></td><td>Map risks across Responsible AI tenets</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Development</h3>
+    <div class="diagram-box">
+      <table>
+        <thead><tr><th>Phase</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><strong>System Design</strong></td><td>Define LLMs, tools, knowledge bases, and guardrails</td></tr>
+          <tr><td><strong>Workflow Design</strong></td><td>Design orchestration paths and control points</td></tr>
+          <tr><td><strong>Implementation</strong></td><td>Build orchestration and integrate components</td></tr>
+          <tr><td><strong>Evaluation &amp; QA</strong></td><td>Test AI-specific risks such as bias, hallucination, and prompt injection</td></tr>
+          <tr><td><strong>Deployment</strong></td><td>Release with monitoring, controls, and rollback capability</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Products and Development</h3>
+    <div class="diagram-box">
+      <table>
+        <thead><tr><th>Phase</th><th>Description</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Monitoring &amp; Feedback</strong></td><td>Track usage, failures, and user feedback</td></tr>
+          <tr><td><strong>Iteration</strong></td><td>Continuously refine prompts, workflows, and models</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>To be clear, this article focuses on the product definition side of the AI-powered feature; however, the components map directly into the tenets of Responsible AI. That is why the development perspective is part of this discussion.</p>
+
+    <div class="post-divider"></div>
+
+    <h2>Defining the Use Cases</h2>
+
+    <p>The first step is to define the use cases clearly. But let’s be honest: in a world where AI capabilities are evolving rapidly, this step is rarely complete upfront. Teams often need to make informed assumptions, release early, and validate those assumptions through real usage and feedback.</p>
+
+    <p>By the way, I am a big fan of Agile—but only where it makes sense. The format of the user stories<sup><a href="#ref-12" style="color: var(--clay); text-decoration:none;">12</a></sup> below will look familiar, but the goal here is not process compliance. The goal is clarity of intent.</p>
+
+    <div class="diagram-box">
+      <table>
+        <thead><tr><th>Use Case</th><th>User Story</th></tr></thead>
+        <tbody>
+          <tr><td>How-To Guidance</td><td>As a manager, I need to ask how-to questions so that I can use the system effectively without formal training.</td></tr>
+          <tr><td>Order Creation and Updates</td><td>As a manager, I need to create and update orders so that ingredients arrive on time and the kitchen can operate without disruption.</td></tr>
+          <tr><td>Inventory Interrogation</td><td>As a manager, I need to check inventory in real time so that I can make informed decisions during service.</td></tr>
+          <tr><td>Supplier Integration</td><td>As a manager, I need to interact with supplier systems through MCP (or similar) so that I can check stock levels and place orders.</td></tr>
+          <tr><td>Dish Recommendation</td><td>As a chef, I need recommendations based on available ingredients so that I can maximize menu availability.</td></tr>
+          <tr><td>Menu Adjustment</td><td>As a manager, I need to update menu options when ingredients are not available in time for opening.</td></tr>
+          <tr><td>Manual Inventory Adjustment</td><td>As an inventory manager, I need to update ingredient quantities to reflect real-world changes.</td></tr>
+          <tr><td>Ingredient Override</td><td>As a chef, I need to override ingredient quantities to accommodate specific client needs.</td></tr>
+          <tr><td>Feedback Collection</td><td>As a user, I need to provide feedback on responses generated by the AI so that the product team can improve the system.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>Mapping Use Cases to Responsible AI Tenets</h3>
+
+    <p>Each use case introduces specific risks. Mapping them to Responsible AI tenets ensures that those risks are explicitly considered in the design.</p>
+
+    <div class="diagram-box">
+      <table>
+        <thead><tr><th>Use Case</th><th>Responsible AI Tenets</th></tr></thead>
+        <tbody>
+          <tr><td>How-To Guidance</td><td>Veracity, Explainability, Transparency</td></tr>
+          <tr><td>Order Creation</td><td>Controllability, Governance, Safety</td></tr>
+          <tr><td>Inventory</td><td>Privacy &amp; Security, Veracity</td></tr>
+          <tr><td>Supplier Integration</td><td>Safety, Governance, Privacy</td></tr>
+          <tr><td>Recommendations</td><td>Fairness, Veracity</td></tr>
+          <tr><td>Menu Adjustment</td><td>Controllability, Explainability</td></tr>
+          <tr><td>Overrides</td><td>Controllability, Governance</td></tr>
+          <tr><td>Feedback</td><td>Transparency, Explainability</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h3>AI-Powered Feature Requirements</h3>
+
+    <p>Ideally, before drawing the architecture components, the team should define the capabilities required to support these use cases. The table below shows how use cases map to system components and Responsible AI considerations.</p>
+
+    <div class="diagram-box">
+      <table>
+        <thead><tr><th>Use Case</th><th>Tenets</th><th>Components</th><th>Design Considerations</th></tr></thead>
+        <tbody>
+          <tr><td>How-To Guidance</td><td>Veracity, Explainability, Transparency</td><td>LLM, Knowledge Base (RAG), Guardrails</td><td>Ground responses with RAG, cite sources, and indicate AI usage in the UI</td></tr>
+          <tr><td>Order Creation and Updates</td><td>Controllability, Governance, Safety</td><td>Internal Tools, Orchestrator, LLM</td><td>Validate inputs, enforce permissions, log actions, and support approvals for high-risk changes</td></tr>
+          <tr><td>Inventory Interrogation</td><td>Privacy &amp; Security, Veracity</td><td>Internal Tools, Orchestrator, LLM</td><td>Ensure data access controls and return grounded, up-to-date inventory data</td></tr>
+          <tr><td>Supplier Integration</td><td>Safety, Governance, Privacy &amp; Security</td><td>External Connectors (MCP), Orchestrator, Guardrails</td><td>Validate external calls, constrain parameters, and audit integrations for MCP</td></tr>
+          <tr><td>Dish Recommendation</td><td>Fairness, Veracity, Explainability</td><td>LLM, Knowledge Base, Guardrails</td><td>Test for bias, ground recommendations in inventory, and capture prompt/context traces</td></tr>
+          <tr><td>Menu Adjustment</td><td>Controllability, Explainability</td><td>Internal Tools, Orchestrator, Human Approval</td><td>Introduce approval gates, provide rationale, and maintain traceability of changes</td></tr>
+          <tr><td>Manual Inventory Adjustment</td><td>Controllability, Governance</td><td>Internal Tools, Orchestrator</td><td>Require authenticated updates, log changes, and enable rollback where needed</td></tr>
+          <tr><td>Ingredient Override</td><td>Controllability, Governance</td><td>Internal Tools, Orchestrator, Human Approval</td><td>Allow overrides with justification, enforce role-based access, and log decisions</td></tr>
+          <tr><td>Feedback Collection</td><td>Transparency, Explainability</td><td>Feedback Capture, Logging, Observability</td><td>Capture thumbs up/down, tie feedback to traces, and use signals for continuous improvement</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="post-divider"></div>
+
+    <h2>The Orchestration-Based Architecture</h2>
+
+    <p>Orchestration is what turns a collection of AI components into a controlled system. Instead of relying on a single model to do everything, an orchestration layer coordinates workflows, tool usage, guardrails, and approval points. That matters because the system is not simply answering questions. It is helping managers interrogate data, update records, recommend actions, and potentially interact with external systems.</p>
+
+    <p>A good orchestration pattern separates responsibilities. One part of the system interprets user intent. Another decides whether the request should be handled through a knowledge base, a tool call, or an external integration. Another layer validates whether the action is allowed. Still another applies guardrails before the final response is returned. This is what makes the feature operationally useful while still keeping it controlled.</p>
+
+    <p>In practical terms, the flow looks like this: the user submits a prompt, the orchestration layer classifies intent, guardrails evaluate safety and policy fit, the orchestrator selects the correct execution path, tools and knowledge sources are called where appropriate, results are validated, and then the final response is generated. If the request is sensitive, such as changing quantities, deleting menu options, or placing an order above a threshold, the workflow can pause for human review before the action is completed.</p>
+
+    <div class="diagram-box">
+      <table>
+        <thead><tr><th>Architecture Step</th><th>Purpose</th></tr></thead>
+        <tbody>
+          <tr><td><strong>User Prompt</strong></td><td>Captures the request, which may be informational, operational, or transactional.</td></tr>
+          <tr><td><strong>Intent Classification</strong></td><td>Determines whether the prompt is a how-to question, a data query, a requested action, or a disallowed request.</td></tr>
+          <tr><td><strong>Guardrails</strong></td><td>Evaluate the request for policy compliance, harmful content, prompt injection attempts, and unsafe behavior.</td></tr>
+          <tr><td><strong>Orchestrator</strong></td><td>Selects the correct workflow path and coordinates tool usage, retrieval, and approval steps.</td></tr>
+          <tr><td><strong>Knowledge Base / RAG</strong></td><td>Provides grounded responses for how-to questions and policy guidance.</td></tr>
+          <tr><td><strong>Internal Tools</strong></td><td>Query and update inventory, menu, and order data.</td></tr>
+          <tr><td><strong>External Connectors</strong></td><td>Integrate with supplier platforms through MCP (or similar) to check stock and place orders.</td></tr>
+          <tr><td><strong>Human Review</strong></td><td>Introduces approvals for sensitive actions or uncertain outcomes.</td></tr>
+          <tr><td><strong>Response Generation</strong></td><td>Produces the final answer using validated data and orchestration context.</td></tr>
+          <tr><td><strong>Observability</strong></td><td>Captures traces, tool calls, approvals, feedback, and errors for later analysis.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>The reason I prefer an orchestration-based design here is that it creates control points that map naturally to the tenets of Responsible AI. <strong>Transparency</strong> can be addressed in the user interface by clearly stating that the user is interacting with AI. <strong>Fairness</strong> is addressed by testing the LLM for bias across personas and situations. <strong>Safety</strong> is addressed by applying guardrails before and after model interaction. <strong>Explainability</strong> is addressed by retaining workflow traces, tool calls, and model context. <strong>Governance</strong> is addressed by assigning ownership, approval thresholds, and SLAs to the components involved in the workflow.</p>
+
+    <p>Just as important, orchestration makes failures diagnosable. Instead of asking a vague question like “why did the AI do that?”, the team can ask much more precise ones: was the intent classified correctly? did the request trigger the wrong tool? did the knowledge base return poor context? did a guardrail fail? was the approval workflow skipped? That level of precision is what allows a product team to improve the feature instead of guessing.</p>
+
+    <blockquote>
+      <p>Orchestration does not remove intelligence from the system. It puts boundaries around it so that intelligence can be used safely, predictably, and at scale.</p>
+    </blockquote>
+
+    <div class="post-divider"></div>
+
+    <h2>What QA Needs to Test Differently</h2>
+
+    <p>Traditional QA tends to focus on deterministic behavior: given the same input, does the system return the expected output? AI-powered features require a broader testing mindset. The feature may behave differently depending on phrasing, context, model updates, and retrieved data. That means QA needs to think not only in terms of expected functionality, but also in terms of Responsible AI failure modes.</p>
+
+    <p>The starting point is to test ordinary business scenarios thoroughly. Managers should be able to ask how-to questions, query inventory, create or update orders, and receive clear, grounded responses. But that is only the baseline. The harder work is in validating how the system behaves when prompts are ambiguous, emotional, malicious, irrelevant, or simply unexpected.</p>
+
+    <div class="diagram-box">
+      <table>
+        <thead><tr><th>QA Area</th><th>What to Test</th><th>Related Tenets</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Toxic Content</strong></td><td>Test prompts with profanity, insults, or emotionally charged input to verify that the chatbot remains professional.</td><td>Safety, Fairness</td></tr>
+          <tr><td><strong>Prompt Injection</strong></td><td>Test whether the model can be manipulated into ignoring instructions, exposing data, or calling unintended tools.</td><td>Safety, Robustness, Privacy &amp; Security</td></tr>
+          <tr><td><strong>Bias Testing</strong></td><td>Test whether responses differ unfairly based on role, language style, cultural phrasing, or persona.</td><td>Fairness</td></tr>
+          <tr><td><strong>Hallucination / Grounding</strong></td><td>Test whether responses stay faithful to tool output and retrieved knowledge rather than inventing facts.</td><td>Veracity, Explainability</td></tr>
+          <tr><td><strong>Role-Based Access</strong></td><td>Test whether only authorized users can change menu options, ingredient mappings, and sensitive records.</td><td>Privacy &amp; Security, Governance</td></tr>
+          <tr><td><strong>Human Review Paths</strong></td><td>Test approval workflows for high-risk actions and validate that rejection and override paths behave clearly.</td><td>Controllability, Governance</td></tr>
+          <tr><td><strong>Feedback Capture</strong></td><td>Test whether thumbs up/down and related comments are captured accurately and tied to the correct trace.</td><td>Transparency, Explainability</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>QA also has to think about variability. The same question may be phrased in multiple ways, sometimes politely and sometimes not. The system needs to remain professional and bounded across those variations. In other words, QA is no longer validating only feature correctness. It is validating the conditions under which the AI remains safe, explainable, fair, and reliable.</p>
+
+    <blockquote>
+      <p>Testing an AI-powered feature is not only about proving that it works. It is about proving that it continues to behave responsibly when real people interact with it in unpredictable ways.</p>
+    </blockquote>
+
+    <div class="post-divider"></div>
+
+    <h2>Ongoing Monitoring</h2>
+
+    <p>Launch is not the end of the work. In many ways, it is the point where Responsible AI becomes most visible. Once real users begin interacting with the system, the team needs to monitor not just feature adoption, but also behavioral drift, model quality, feedback signals, and workflow failures.</p>
+
+    <p>Human feedback provides a learning loop for the team responsible for on-going improvements of the AI-powered feature. Observability ensures that issues can be traced, understood, and corrected. Without those two capabilities, the product team is left guessing whether the AI is improving, drifting, or quietly creating risk.</p>
+
+    <div class="diagram-box">
+      <table>
+        <thead><tr><th>Monitoring Area</th><th>Why It Matters</th></tr></thead>
+        <tbody>
+          <tr><td><strong>Prompt Patterns</strong></td><td>Identify how users are actually phrasing requests and where intent classification needs refinement.</td></tr>
+          <tr><td><strong>Guardrail Events</strong></td><td>Track how often harmful or disallowed inputs are detected and whether policies need tuning.</td></tr>
+          <tr><td><strong>Tool Usage</strong></td><td>Monitor which tools are being called, whether they succeed, and where failures occur.</td></tr>
+          <tr><td><strong>Approval Rates</strong></td><td>Understand how often human review is triggered and whether approvals are too loose or too restrictive.</td></tr>
+          <tr><td><strong>Feedback Signals</strong></td><td>Use thumbs up/down and comments to identify weak workflows or poor response quality.</td></tr>
+          <tr><td><strong>Response Drift</strong></td><td>Watch for changing model behavior over time as prompts, usage patterns, or models change.</td></tr>
+          <tr><td><strong>Incident Analysis</strong></td><td>Support root cause analysis when a user reports harmful, inaccurate, or unprofessional behavior.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <p>Monitoring is how the tenets of Responsible AI become operational. It is where <strong>Explainability</strong> becomes traceability, <strong>Governance</strong> becomes ownership, and <strong>Safety</strong> becomes an active control rather than a design assumption. Teams that take monitoring seriously are far more likely to identify weak signals early—before those weak signals become public failures.</p>
+
+    <div class="callout">
+      <div class="callout-label">Takeaway</div>
+      <p>Responsible AI is not a bolt-on exercise. It shapes the use cases, requirements, architecture, QA strategy, and monitoring model of the feature. The more operational the AI becomes, the more important those controls become.</p>
+    </div>
+
+    <div class="post-divider"></div>
+
+    <div class="summary-box">
+      <p><strong>Up Next:</strong> In the next post, I will go one level deeper and map this orchestration pattern to specific products and services that can be used to implement each control point in practice.</p>
+    </div>
+
+  </div>
+
+  <div class="references-wrap">
+    <div class="references-inner">
+      <h2>References</h2>
+      <ol>
+        <li id="ref-1">Bhagwat, S. (2024). <em>Patterns for building AI agents</em>.</li>
+        <li id="ref-2">Bhagwat, S. (2024). <em>Principles of building AI agents</em> (2nd ed.).</li>
+        <li id="ref-3">Google Cloud. (2024). <em>Choose a design pattern for an agentic AI system</em>. Retrieved April 17, 2026, from <a href="https://docs.cloud.google.com/architecture/choose-design-pattern-agentic-ai-system" target="_blank" rel="noopener">docs.cloud.google.com</a></li>
+        <li id="ref-4">Agentic Design. (2024). <em>Agentic design patterns</em>. Retrieved April 17, 2026, from <a href="https://agentic-design.ai/patterns" target="_blank" rel="noopener">agentic-design.ai</a></li>
+        <li id="ref-5">Jain, A. (2023). <em>Agentic AI architectures and design patterns</em>. Medium. Retrieved April 17, 2026, from <a href="https://medium.com/@anil.jain.baba/agentic-ai-architectures-and-design-patterns-288ac589179a" target="_blank" rel="noopener">medium.com</a></li>
+        <li id="ref-6">Microsoft. (2024). <em>AI agent design patterns</em>. Retrieved April 17, 2026, from <a href="https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/ai-agent-design-patterns" target="_blank" rel="noopener">learn.microsoft.com</a></li>
+        <li id="ref-7">Bijit. (2023). <em>Agentic design patterns</em>. Medium. Retrieved April 17, 2026, from <a href="https://medium.com/@bijit211987/agentic-design-patterns-cbd0aae2962f" target="_blank" rel="noopener">medium.com</a></li>
+        <li id="ref-8">Kerem, A. (2024). <em>AI agents design patterns explained</em>. Medium. Retrieved April 17, 2026, from <a href="https://medium.com/@aydinKerem/ai-agents-design-patterns-explained-b3ac0433c915" target="_blank" rel="noopener">medium.com</a></li>
+        <li id="ref-9">Dumont, J. (2026). <em>Why Responsible AI matters</em>.</li>
+        <li id="ref-10">Dumont, J. (2026). <em>The 8 tenets of Responsible AI</em>.</li>
+        <li id="ref-11">Dumont, J. (2026). <em>Responsible AI in practice</em>.</li>
+        <li id="ref-12">Scrum Alliance. (n.d.). <em>Anatomy of a user story</em>. Retrieved April 17, 2026, from <a href="https://resources.scrumalliance.org/Article/anatomy-user-story" target="_blank" rel="noopener">resources.scrumalliance.org</a></li>
+      </ol>
+    </div>
+  </div>
+
+  <div class="post-footer">
+    <div class="author-block">
+      <div class="author-avatar">JD</div>
+      <div>
+        <div class="author-name">Joseph Dumont</div>
+        <div class="author-title">Full Lifecycle Product Owner</div>
+      </div>
+    </div>
+    <a href="../index.html#blog" class="back-btn">← Back to blog</a>
+  </div>
+
+</body>
+</html>
