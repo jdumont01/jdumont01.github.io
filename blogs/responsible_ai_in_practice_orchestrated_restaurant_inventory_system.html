@@ -183,7 +183,7 @@
 
     <h2>From Ideation to Production</h2>
 
-    <p>Before we dive into the details, it helps to outline the end-to-end journey from ideation to production for this AI-powered feature. In practice, product definition, development, and Responsible AI considerations evolve together. In my experience, it can be a challenge to separate product definition from AI behavior, but in reality those they evolve together. It is iterative, and often messy, especially when working with AI systems where behavior can change based on inputs, data, and model updates.</p>
+    <p>Before we dive into the details, it helps to outline the end-to-end journey from ideation to production for this AI-powered feature. In practice, product definition, development, and Responsible AI considerations evolve together. In my experience, it can be a challenge to separate product definition from AI behavior, but, in reality they evolve together. It is iterative, and often messy, especially when working with AI systems where behavior can change based on inputs, data, and model updates.</p>
 
     <h3>Products</h3>
     <div class="diagram-box">
@@ -275,7 +275,7 @@
 
     <h3>AI-Powered Feature Requirements</h3>
 
-    <p>Ideally, before drawing the architecture components, the team should define the capabilities required to support these use cases. The table below extends the previous table as it includes AI-specific technical components mapped to both the Use Case and the tenets. The last column describes what should be considered for each tenet.</p>
+    <p>Before jumping into architecture, the team should define the capabilities the system actually needs to support these use cases. The table below extends the previous table as it includes AI-specific technical components mapped to both the Use Case and the tenets. The last column describes what should be considered for each tenet.</p>
 
     <div class="diagram-box">
       <table>
@@ -302,9 +302,9 @@
 
     <p>This section discusses components of the AI-powered chatbot. However, this is meant to map the tenets of Responsible AI to the components and not dive into the technical implementation of each component (e.g. how an observability tool was chosen, or the best embedding model to use for the Knowledge Base, etc.).</p>
 
-    <p>There are several AI design patterns the Lattice Culinary Systems design team could use<sup><a href="#ref-5" style="color: var(--clay); text-decoration:none;">5</a></sup><sup><a href="#ref-6" style="color: var(--clay); text-decoration:none;">6</a></sup><sup><a href="#ref-7" style="color: var(--clay); text-decoration:none;">7</a></sup><sup><a href="#ref-8" style="color: var(--clay); text-decoration:none;">8</a></sup><sup><a href="#ref-9" style="color: var(--clay); text-decoration:none;">9</a></sup><sup><a href="#ref-10" style="color: var(--clay); text-decoration:none;">10</a></sup><sup><a href="#ref-11" style="color: var(--clay); text-decoration:none;">11</a></sup><sup><a href="#ref-12" style="color: var(--clay); text-decoration:none;">12</a></sup>.  They decided to employ an orchestration pattern for the chatbot.  Orchestration is what turns a collection of AI components into a controlled system. Instead of relying on a single model to do everything, an orchestration layer coordinates workflows, tool usage, guardrails, and approval points. Without this layer, the system quickly becomes unpredictable, especially when it starts interacting with real data and real users. That matters because the system is not simply answering questions. It is helping managers interrogate data, update records, recommend actions, and potentially interact with external systems.</p>
+    <p>There are several AI design patterns the Lattice Culinary Systems design team could use<sup><a href="#ref-5" style="color: var(--clay); text-decoration:none;">5</a></sup><sup><a href="#ref-6" style="color: var(--clay); text-decoration:none;">6</a></sup><sup><a href="#ref-7" style="color: var(--clay); text-decoration:none;">7</a></sup><sup><a href="#ref-8" style="color: var(--clay); text-decoration:none;">8</a></sup><sup><a href="#ref-9" style="color: var(--clay); text-decoration:none;">9</a></sup><sup><a href="#ref-10" style="color: var(--clay); text-decoration:none;">10</a></sup><sup><a href="#ref-11" style="color: var(--clay); text-decoration:none;">11</a></sup><sup><a href="#ref-12" style="color: var(--clay); text-decoration:none;">12</a></sup>.  They decided to employ an orchestration pattern for the chatbot.  Orchestration is what turns a collection of AI components into a controlled system. Instead of relying on a single model to do everything, an orchestration layer coordinates workflows, tool usage, guardrails, and approval points. Without this layer, the system quickly becomes unpredictable, especially when it starts interacting with real data and real users. That distinction matters, because the system is not just answering questions—it’s taking actions. It is helping managers interrogate data, update records, recommend actions, and potentially interact with external systems.</p>
 
-    <p>In practice, orchestration works best when responsibilities are clearly separated.  If everything is handled in one place, it becomes difficult to understand what went wrong when something breaks. One part of the system interprets user intent. Another decides whether the request should be handled through a knowledge base, a tool call, or an external integration. Another layer validates whether the action is allowed. Still another applies guardrails before the final response is returned. This is what makes the feature operationally useful while still keeping it controlled.</p>
+    <p>In practice, orchestration works best when responsibilities are clearly separated.  If everything is handled in one place, it becomes difficult to understand what went wrong when something breaks. One part of the system interprets user intent, another decides how to handle it (knowledge base, tool call, or external integration), another validates whether the action should even happen, and another applies guardrails before the final response is returned. This is what makes the feature operationally useful while still keeping it controlled.</p>
 
     <p>At a high level, the flow looks like this: the user submits a prompt, the orchestration layer classifies intent, guardrails evaluate safety and policy fit, the orchestrator selects the correct execution path, tools and knowledge sources are called where appropriate, results are validated, and then the final response is generated. If the request is sensitive, such as changing quantities, deleting menu options, or placing an order above a threshold, the workflow can pause for human review before the action is completed.</p>
 
@@ -338,11 +338,11 @@
 
     <h2>Testing Considerations</h2>
 
-    <p>Traditional QA tends to focus on deterministic behavior: given the same input, does the system return the expected output? AI-powered features require a broader testing mindset. The feature may behave differently depending on phrasing, context, model updates, and retrieved data. That means QA needs to think not only in terms of expected functionality, but also in terms of Responsible AI failure modes.</p>
+    <p>Traditional QA tends to focus on deterministic behavior: given the same input, does the system return the expected output? AI-powered features force a broader testing mindset. The feature may behave differently depending on phrasing, context, model updates, and retrieved data. That means QA needs to think not only in terms of expected functionality, but also in terms of Responsible AI failure modes.</p>
 
     <p>This is where traditional QA approaches can break down. You’re no longer testing just functionality, you’re testing behavior.</p>
 
-    <p>The starting point is to test ordinary business scenarios thoroughly. To this end, restaurant managers and other users should be able to ask how-to questions, query inventory, create or update orders, and receive clear, grounded responses. But that is only the baseline. The harder work is in validating how the system behaves when prompts are ambiguous, emotional, malicious, irrelevant, or simply unexpected.</p>
+    <p>The starting point is to test ordinary business scenarios thoroughly. To this end, restaurant managers and other users should be able to ask how-to questions, query inventory, create or update orders, and receive clear, grounded responses. That’s just the baseline. The harder part is validating how the system behaves when prompts are ambiguous, emotional, malicious, irrelevant, or simply unexpected.</p>
 
     <div class="diagram-box">
       <table>
@@ -359,7 +359,7 @@
       </table>
     </div>
 
-    <p>QA also has to think about variability. The same question may be phrased in multiple ways, sometimes politely and sometimes not. The system needs to remain professional and bounded across those variations. In other words, QA is no longer validating only feature correctness. It is validating the conditions under which the AI remains safe, explainable, fair, and reliable.</p>
+    <p>QA also has to think about variability. The same question may be phrased in multiple ways, sometimes politely and sometimes not. The system needs to remain professional and bounded across those variations. This is the shift: QA is no longer just validating feature correctness. It is validating the conditions under which the AI remains safe, explainable, fair, and reliable.</p>
 
     <blockquote>
       <p>Testing an AI-powered feature is not only about proving that it works. It is about proving that it continues to behave responsibly when real people interact with it in unpredictable ways.</p>
@@ -369,9 +369,9 @@
 
     <h2>Ongoing Monitoring</h2>
 
-    <p>Launch is not the end of the work. If anything, it’s where the real work begins. In many ways, it is the point where Responsible AI becomes most visible. Once real users begin interacting with the system, the team needs to monitor not just feature adoption, but also behavioral drift, model quality, feedback signals, and workflow failures.</p>
+    <p>Launch is not the end of the work. If anything, it’s where the real work begins. In many ways, it is the point where Responsible AI becomes most visible. Once real users start interacting with the system, the team needs to monitor more than just feature adoption, but also behavioral drift, model quality, feedback signals, and workflow failures.</p>
 
-    <p>Human feedback provides a learning loop for the team responsible for on-going improvements of the AI-powered feature. Observability ensures that issues can be traced, understood, and corrected. Without those two capabilities, the product team is left guessing whether the AI is improving, drifting, or quietly creating risk.</p>
+    <p>Human feedback creates the learning loop for the product and development teams responsible for improving the feature. Observability makes it possible to understand what actually happened when something goes wrong. Without those two capabilities, the product team is left guessing what actually happened.</p>
 
     <div class="diagram-box">
       <table>
@@ -388,7 +388,7 @@
       </table>
     </div>
 
-    <p>Monitoring is how the tenets of Responsible AI become operational. It is where <strong>Explainability</strong> becomes traceability, <strong>Governance</strong> becomes ownership, and <strong>Safety</strong> becomes an active control rather than a design assumption. Teams that take monitoring seriously are far more likely to identify weak signals early before they become public failures.  Go back and review the failures listed in the first blog.</p>
+    <p>This is where the tenets of Responsible AI become operational. It is where <strong>Explainability</strong> becomes traceability, <strong>Governance</strong> becomes ownership, and <strong>Safety</strong> becomes an active control rather than a design assumption. Teams that take monitoring seriously are far more likely to identify weak signals early before they become public failures.  Go back and review the failures listed in the first blog.</p>
 
     <div class="callout">
       <div class="callout-label">Takeaway</div>
