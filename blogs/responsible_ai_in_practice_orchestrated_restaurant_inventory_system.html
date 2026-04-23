@@ -75,13 +75,29 @@
       content: ''; position: absolute; left: 0; top: 0.65em; width: 6px; height: 6px; border-radius: 50%; background: var(--clay); }
 
     .callout {
-      background: var(--card-bg); border: 0.5px solid var(--border); border-left: 3px solid var(--clay); border-radius: 0 12px 12px 0; padding: 1.25rem 1.5rem; margin: 2rem 0; }
+      background: rgba(196, 113, 74, 0.12);
+      border: 0.5px solid var(--clay);
+      border-left: 4px solid var(--clay-dark);
+      border-radius: 12px;
+      padding: 1.5rem 1.6rem;
+      margin: 2rem 0;
+    }
 
     .callout-label {
-      font-size: 0.7rem; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--clay); margin-bottom: 0.5rem; }
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--clay-dark);
+      margin-bottom: 0.6rem;
+    }
 
     .callout p {
-      margin: 0 !important; font-size: 0.95rem !important; color: var(--ink-mid) !important; }
+      margin: 0 !important;
+      font-size: 0.95rem !important;
+      color: var(--clay-dark) !important;
+      line-height: 1.7 !important;
+    }
 
     .summary-box {
       background: #f0f6f2; border-radius: 16px; padding: 1.5rem 1.75rem; margin: 2rem 0; border: 0.5px solid rgba(58, 92, 74, 0.2); }
@@ -167,8 +183,8 @@
     </div>
 
     <div class="callout">
-      <div class="callout-label">Note</div>
-      <p>This product example is fictitious and is intended for educational purposes only.</p>
+      <div class="callout-label">Important Note</div>
+      <p>The company and individual names used in this product example are fictitious and are intended for educational purposes only.<br><br>It does not constitute legal advice and should not be relied upon as such. For any legal concerns related to AI compliance, data privacy, or regulatory obligations, please consult a qualified legal professional.</p>
     </div>
 
     
@@ -185,22 +201,26 @@
 
     <p>Before we dive into the details, it helps to outline the end-to-end journey from ideation to production for this AI-powered feature. In practice, product definition, development, and Responsible AI considerations evolve together. In my experience, it can be a challenge to separate product definition from AI behavior, but, in reality they evolve together. It is iterative, and often messy, especially when working with AI systems where behavior can change based on inputs, data, and model updates.</p>
 
+    <p>The journey steps are assigned either to the Products team and/or the Development team.</p>
+
     <h3>Products</h3>
     <div class="diagram-box">
       <table>
-        <thead><tr><th>Phase</th><th>Description</th></tr></thead>
+        <thead><tr><th>Journey Step</th><th>Description</th></tr></thead>
         <tbody>
-          <tr><td>Problem Definition</td><td>Clearly define the user problem, business value, and success metrics</td></tr>
           <tr><td>Use Case Design</td><td>Identify user workflows, intents, and where AI adds value</td></tr>
+          <tr><td>Problem Definition</td><td>Clearly define the user problem, business value, and success metrics</td></tr>
           <tr><td>Risk Identification</td><td>Map risks across Responsible AI tenets<sup><a href="#ref-2" style="color: var(--clay); text-decoration:none;">2</a></sup></td></tr>
         </tbody>
       </table>
     </div>
 
+    <p>Use Cases are constantly being validated and can change depending on the perception of the target audience.</p>
+
     <h3>Development</h3>
     <div class="diagram-box">
       <table>
-        <thead><tr><th>Phase</th><th>Description</th></tr></thead>
+        <thead><tr><th>Journey Step</th><th>Description</th></tr></thead>
         <tbody>
           <tr><td>System Design</td><td>Define LLMs, tools, knowledge bases, and guardrails</td></tr>
           <tr><td>Workflow Design</td><td>Design orchestration paths and control points</td></tr>
@@ -214,13 +234,15 @@
     <h3>Products and Development</h3>
     <div class="diagram-box">
       <table>
-        <thead><tr><th>Phase</th><th>Description</th></tr></thead>
+        <thead><tr><th>Journey Step</th><th>Description</th></tr></thead>
         <tbody>
           <tr><td>Monitoring &amp; Feedback</td><td>Track usage, failures, and user feedback</td></tr>
           <tr><td>Iteration</td><td>Continuously refine prompts, workflows, and models</td></tr>
         </tbody>
       </table>
     </div>
+
+    <p>Monitoring the behavior of the AI is crucial to ensure that you can demonstrate controllability as well as explain how the AI derived responses. Further, by monitoring user feedback (i.e., both positive and negative), product definition can be changed quickly to ensure the AI is both safe to use and provides the best user experience possible.</p>
 
     <p>To be clear, this article focuses on the product definition side of the AI-powered feature; however, the components map directly into the tenets of Responsible AI. That is why the development perspective is part of this discussion.</p>
 
@@ -233,8 +255,6 @@
     <p>One other thing, I am a big fan of Agile, but only where it makes sense. The format of the user stories<sup><a href="#ref-4" style="color: var(--clay); text-decoration:none;">4</a></sup> below will look familiar.</p>
 
     <p>In this example, the primary users are restaurant managers and kitchen staff working inside a food inventory system.  Their goals are to ensure menu availability, manage ingredients efficiently, and respond quickly during peak operation times.  Building on the scenario from the previous article, the chatbot supports the following real-world use cases:</p>
-
-    <p>These are not theoretical use cases. They reflect the types of interactions that happen during real service hours, when speed and accuracy matter.</p>
 
     <div class="diagram-box">
       <table>
@@ -253,33 +273,35 @@
       </table>
     </div>
 
+    <p>These are not theoretical use cases. They reflect the types of interactions that happen during real service hours, when speed and accuracy matter.</p>
+
     <h3>Mapping Use Cases to Responsible AI Tenets</h3>
 
     <p>Each use case introduces different types of risk, and if you don’t map them explicitly, they tend to show up later in production. Mapping them to Responsible AI tenets ensures that those risks are explicitly considered in the design.</p>
 
     <div class="diagram-box">
       <table>
-        <thead><tr><th>Use Case</th><th>Responsible AI Tenets</th></tr></thead>
+        <thead><tr><th>Use Case</th><th>Risks</th><th>Responsible AI Tenets</th></tr></thead>
         <tbody>
-          <tr><td>How-To Guidance</td><td>Veracity, Explainability</td></tr>
-          <tr><td>Order Creation</td><td>Controllability, Governance, Safety</td></tr>
-          <tr><td>Inventory</td><td>Privacy &amp; Security, Veracity</td></tr>
-          <tr><td>Supplier Integration</td><td>Safety, Governance, Privacy</td></tr>
-          <tr><td>Recommendations</td><td>Fairness, Veracity</td></tr>
-          <tr><td>Menu Adjustment</td><td>Controllability, Explainability</td></tr>
-          <tr><td>Overrides</td><td>Controllability, Governance</td></tr>
-          <tr><td>Feedback</td><td>Transparency, Explainability</td></tr>
+          <tr><td>How-To Guidance</td><td>Incorrect or misleading guidance, hallucinated instructions</td><td>Veracity, Explainability</td></tr>
+          <tr><td>Order Creation</td><td>Incorrect orders, unauthorized changes, operational disruption</td><td>Controllability, Governance, Safety</td></tr>
+          <tr><td>Inventory</td><td>Exposure of sensitive data, inaccurate inventory insights</td><td>Privacy &amp; Security, Veracity</td></tr>
+          <tr><td>Supplier Integration</td><td>Improper external calls, data leakage, unintended transactions</td><td>Safety, Governance, Privacy</td></tr>
+          <tr><td>Recommendations</td><td>Biased or irrelevant recommendations, poor decision support</td><td>Fairness, Veracity</td></tr>
+          <tr><td>Menu Adjustment</td><td>Incorrect menu changes, lack of traceability for decisions</td><td>Controllability, Explainability</td></tr>
+          <tr><td>Overrides</td><td>Unauthorized overrides, lack of auditability</td><td>Controllability, Governance</td></tr>
+          <tr><td>Feedback</td><td>Loss of feedback signals, inability to improve system behavior</td><td>Transparency, Explainability</td></tr>
         </tbody>
       </table>
     </div>
 
     <h3>AI-Powered Feature Requirements</h3>
 
-    <p>Before jumping into architecture, the team should define the capabilities the system actually needs to support these use cases. The table below extends the previous table as it includes AI-specific technical components mapped to both the Use Case and the tenets. The last column describes what should be considered for each tenet.</p>
+    <p>Before jumping into architecture, the team should define the capabilities the system actually needs to support these use cases. The table below extends the previous table as it includes AI-specific technical components mapped to both the Use Case and the tenets. The last column describes what should be considered for each Responsible AI tenet.</p>
 
     <div class="diagram-box">
       <table>
-        <thead><tr><th>Use Case</th><th>Tenets</th><th>Components</th><th>Design Considerations</th></tr></thead>
+        <thead><tr><th>Use Case</th><th>Responsible AI Tenet</th><th>Components</th><th>Design Considerations</th></tr></thead>
         <tbody>
           <tr><td>How-To Guidance</td><td>Veracity, Explainability</td><td>LLM, Knowledge Base (RAG), Guardrails</td><td>Ground responses with RAG, cite sources, and indicate AI usage in the UI</td></tr>
           <tr><td>Order Creation and Updates</td><td>Controllability, Governance, Safety</td><td>Internal Tools, Orchestrator, LLM</td><td>Validate inputs, enforce permissions, log actions, and support approvals for high-risk changes</td></tr>
@@ -300,9 +322,9 @@
 
     <h2>Chatbot AI Components</h2>
 
-    <p>This section discusses components of the AI-powered chatbot. However, this is meant to map the tenets of Responsible AI to the components and not dive into the technical implementation of each component (e.g. how an observability tool was chosen, or the best embedding model to use for the Knowledge Base, etc.).</p>
+    <p>Now let's discuss the components of the AI-powered chatbot. We will map the tenets of Responsible AI to the components rather than dive into the technical implementation of each component (e.g. how an observability tool was chosen, or the best embedding model to use for the Knowledge Base, etc.).</p>
 
-    <p>There are several AI design patterns the Lattice Culinary Systems design team could use<sup><a href="#ref-5" style="color: var(--clay); text-decoration:none;">5</a></sup><sup><a href="#ref-6" style="color: var(--clay); text-decoration:none;">6</a></sup><sup><a href="#ref-7" style="color: var(--clay); text-decoration:none;">7</a></sup><sup><a href="#ref-8" style="color: var(--clay); text-decoration:none;">8</a></sup><sup><a href="#ref-9" style="color: var(--clay); text-decoration:none;">9</a></sup><sup><a href="#ref-10" style="color: var(--clay); text-decoration:none;">10</a></sup><sup><a href="#ref-11" style="color: var(--clay); text-decoration:none;">11</a></sup><sup><a href="#ref-12" style="color: var(--clay); text-decoration:none;">12</a></sup>.  They decided to employ an orchestration pattern for the chatbot.  Orchestration is what turns a collection of AI components into a controlled system. Instead of relying on a single model to do everything, an orchestration layer coordinates workflows, tool usage, guardrails, and approval points. Without this layer, the system quickly becomes unpredictable, especially when it starts interacting with real data and real users. That distinction matters, because the system is not just answering questions—it’s taking actions. It is helping managers interrogate data, update records, recommend actions, and potentially interact with external systems.</p>
+    <p>There are several AI design patterns the Lattice Culinary Systems design team could use<sup><a href="#ref-5" style="color: var(--clay); text-decoration:none;">5,</a></sup> <sup><a href="#ref-6" style="color: var(--clay); text-decoration:none;">6,</a></sup> <sup><a href="#ref-7" style="color: var(--clay); text-decoration:none;">7,</a></sup> <sup><a href="#ref-8" style="color: var(--clay); text-decoration:none;">8,</a></sup> <sup><a href="#ref-9" style="color: var(--clay); text-decoration:none;">9,</a></sup> <sup><a href="#ref-10" style="color: var(--clay); text-decoration:none;">10,</a></sup> <sup><a href="#ref-11" style="color: var(--clay); text-decoration:none;">11,</a></sup> <sup><a href="#ref-12" style="color: var(--clay); text-decoration:none;">12</a></sup>.  They decided to employ an orchestration pattern for the chatbot.  Orchestration is what turns a collection of AI components into a controlled system. Instead of relying on a single model to do everything, an orchestration layer coordinates workflows, tool usage, guardrails, and approval points. Without this layer, the system quickly becomes unpredictable, especially when it starts interacting with real data and real users. That distinction matters, because the system is not just answering questions—it’s taking actions. It is helping managers interrogate data, update records, recommend actions, and potentially interact with external systems.</p>
 
     <p>In practice, orchestration works best when responsibilities are clearly separated.  If everything is handled in one place, it becomes difficult to understand what went wrong when something breaks. One part of the system interprets user intent, another decides how to handle it (knowledge base, tool call, or external integration), another validates whether the action should even happen, and another applies guardrails before the final response is returned. This is what makes the feature operationally useful while still keeping it controlled.</p>
 
@@ -312,17 +334,17 @@
 
     <div class="diagram-box">
       <table>
-        <thead><tr><th>AI Component</th><th>Purpose</th><th>Tenets</th></tr></thead>
+        <thead><tr><th>AI Component</th><th>Purpose</th><th>Responsible AI Tenet</th></tr></thead>
         <tbody>
-          <tr><td>User Prompt</td><td>Captures the request, which may be informational, operational, or transactional.</td><td>Transparency</td></tr>
-          <tr><td>Intent Classification</td><td>Determines whether the prompt is a how-to question, a data query, a requested action, or a disallowed request.</td><td>Explainability, Veracity</td></tr>
+          <tr><td>System Prompt</td><td>Defines the instructions, policies, and persona that guide how the AI behaves across all interactions.</td><td>Governance, Safety, Transparency</td></tr>
+          <tr><td>LLM (inbound)</td><td>Interprets the user input, extracts intent, and determines how the request should be handled within the system.</td><td>Explainability, Veracity</td></tr>
           <tr><td>Guardrails</td><td>Evaluate the request for policy compliance, harmful content, prompt injection attempts, and unsafe behavior.</td><td>Safety, Governance</td></tr>
           <tr><td>Orchestrator</td><td>Selects the correct workflow path and coordinates tool usage, retrieval, and approval steps.</td><td>Controllability, Governance</td></tr>
           <tr><td>Knowledge Base / RAG</td><td>Provides grounded responses for how-to questions and policy guidance.</td><td>Veracity, Explainability</td></tr>
           <tr><td>Internal Tools</td><td>Query and update inventory, menu, and order data.</td><td>Governance, Privacy &amp; Security</td></tr>
           <tr><td>External Connectors</td><td>Integrate with supplier platforms through MCP (or similar) to check stock and place orders.</td><td>Privacy &amp; Security, Governance</td></tr>
           <tr><td>Human-in-the-Loop</td><td>Introduces approvals for sensitive actions or uncertain outcomes.</td><td>Controllability, Governance</td></tr>
-          <tr><td>Response Generation</td><td>Produces the final answer using validated data and orchestration context.</td><td>Veracity, Safety</td></tr>
+          <tr><td>LLM (outbound)</td><td>Generates the final response using validated data, tool outputs, and orchestration context while maintaining safe and grounded behavior.</td><td>Veracity, Safety, Explainability</td></tr>
           <tr><td>Observability</td><td>Captures traces, tool calls, approvals, feedback, and errors for later analysis.</td><td>Explainability, Governance</td></tr>
         </tbody>
       </table>
@@ -340,15 +362,15 @@
 
     <p>Traditional QA tends to focus on deterministic behavior: given the same input, does the system return the expected output? AI-powered features force a broader testing mindset. The feature may behave differently depending on phrasing, context, model updates, and retrieved data. That means QA needs to think not only in terms of expected functionality, but also in terms of Responsible AI failure modes.</p>
 
-    <p>This is where traditional QA approaches can break down. You’re no longer testing just functionality, you’re testing behavior.</p>
+    <p>This is where traditional QA approaches can break down. You’re no longer testing just functionality, you’re testing human-like behavior.</p>
 
-    <p>The starting point is to test ordinary business scenarios thoroughly. To this end, restaurant managers and other users should be able to ask how-to questions, query inventory, create or update orders, and receive clear, grounded responses. That’s just the baseline. The harder part is validating how the system behaves when prompts are ambiguous, emotional, malicious, irrelevant, or simply unexpected.</p>
+    <p>The starting point is to test ordinary business scenarios thoroughly. To this end, restaurant managers and other users should be able to ask How-To questions, query inventory, create or update orders, and receive clear, grounded responses. That’s just the baseline. The harder part is validating how the system behaves when prompts are ambiguous, emotional, malicious, irrelevant, or simply unexpected.</p>
 
     <div class="diagram-box">
       <table>
         <thead><tr><th>QA Area</th><th>What to Test</th><th>Related Tenets</th></tr></thead>
         <tbody>
-          <tr><td>Toxic Content</td><td>Test prompts with profanity, insults, or emotionally charged input to verify that the chatbot remains professional.</td><td>Safety, Fairness</td></tr>
+          <tr><td>Toxic Content</td><td>Test prompts with profanity, insults, or emotionally charged input to verify that the chatbot remains professional.</td><td>Safety, Fairness, Veracity, Robustness</td></tr>
           <tr><td>Prompt Injection</td><td>Test whether the model can be manipulated into ignoring instructions, exposing data, or calling unintended tools.</td><td>Safety, Robustness, Privacy &amp; Security</td></tr>
           <tr><td>Bias Testing</td><td>Test whether responses differ unfairly based on role, language style, cultural phrasing, or persona.</td><td>Fairness</td></tr>
           <tr><td>Hallucination / Grounding</td><td>Test whether responses stay faithful to tool output and retrieved knowledge rather than inventing facts.</td><td>Veracity, Explainability</td></tr>
@@ -359,7 +381,7 @@
       </table>
     </div>
 
-    <p>QA also has to think about variability. The same question may be phrased in multiple ways, sometimes politely and sometimes not. The system needs to remain professional and bounded across those variations. This is the shift: QA is no longer just validating feature correctness. It is validating the conditions under which the AI remains safe, explainable, fair, and reliable.</p>
+    <p>QA also has to think about variability. The same question may be phrased in multiple ways, sometimes politely and sometimes not. Consider the situation from the previous story when Solène prompted the chatbot using "choice French idioms" and the chatbot generated a response that left her feeling hurt. The system needs to remain professional and bounded across those variations. This is the shift: QA is no longer just validating feature correctness. It is validating the conditions under which the AI remains safe, explainable, fair, and reliable.</p>
 
     <blockquote>
       <p>Testing an AI-powered feature is not only about proving that it works. It is about proving that it continues to behave responsibly when real people interact with it in unpredictable ways.</p>
@@ -369,9 +391,9 @@
 
     <h2>Ongoing Monitoring</h2>
 
-    <p>Launch is not the end of the work. If anything, it’s where the real work begins. In many ways, it is the point where Responsible AI becomes most visible. Once real users start interacting with the system, the team needs to monitor more than just feature adoption, but also behavioral drift, model quality, feedback signals, and workflow failures.</p>
+    <p>Launch is not the end of the work. If anything, it’s where the real work begins. This is where Responsible AI becomes visible to the business. Once real users start interacting with the system, the team needs to monitor more than just feature adoption, but also behavioral drift, model quality, feedback signals, and workflow failures.</p>
 
-    <p>Human feedback creates the learning loop for the product and development teams responsible for improving the feature. Observability makes it possible to understand what actually happened when something goes wrong. Without those two capabilities, the product team is left guessing what actually happened.</p>
+    <p>Human feedback creates the learning loop for the product and development teams responsible for improving the feature. Observability makes it possible to understand what actually happened when something goes wrong. Without those two capabilities, the product and development teams are left guessing why it happened.</p>
 
     <div class="diagram-box">
       <table>
@@ -380,7 +402,8 @@
           <tr><td>Prompt Patterns</td><td>Identify how users are actually phrasing requests and where intent classification needs refinement.</td></tr>
           <tr><td>Guardrail Events</td><td>Track how often harmful or disallowed inputs are detected and whether policies need tuning.</td></tr>
           <tr><td>Tool Usage</td><td>Monitor which tools are being called, whether they succeed, and where failures occur.</td></tr>
-          <tr><td>Approval Rates</td><td>Understand how often human review is triggered and whether approvals are too loose or too restrictive.</td></tr>
+          <tr><td>Approval Rates</td><td>Understand how often the user agrees with the response: content, data accuracy, context, etc., to demonstrate trust in the AI.</td></tr>
+          <tr><td>Disapproval Rates</td><td>Identify how often responses do not agree with the user's expectations which can, in the case of responses that are considered offensive, inaccurate, etc., a lack of user trust in the system.</td></tr>
           <tr><td>Feedback Signals</td><td>Use thumbs up/down and comments to identify weak workflows or poor response quality.</td></tr>
           <tr><td>Response Drift</td><td>Watch for changing model behavior over time as prompts, usage patterns, or models change.</td></tr>
           <tr><td>Incident Analysis</td><td>Support root cause analysis when a user reports harmful, inaccurate, or unprofessional behavior.</td></tr>
@@ -388,7 +411,7 @@
       </table>
     </div>
 
-    <p>This is where the tenets of Responsible AI become operational. It is where <strong>Explainability</strong> becomes traceability, <strong>Governance</strong> becomes ownership, and <strong>Safety</strong> becomes an active control rather than a design assumption. Teams that take monitoring seriously are far more likely to identify weak signals early before they become public failures.  Go back and review the failures listed in the first blog.</p>
+    <p>Implementing observability and reviewing the monitoring data regularly, pivots the tenets of Responsible AI from a product workflow to an operational tool for product improvement. It is where <strong>Explainability</strong> becomes traceability, <strong>Governance</strong> becomes ownership, and <strong>Safety</strong> becomes an active control rather than a design assumption. Teams that take monitoring seriously are far more likely to identify unexpected and unacceptable behaviors of the AI early, before they become failures that eventually surface publicly.  Go back and review the failures listed in the first blog. Can you identify how the Tenet of Responsible AI could have improved the user experience for those failures? </p>
 
     <div class="callout">
       <div class="callout-label">Takeaway</div>
